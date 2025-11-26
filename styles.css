@@ -54,6 +54,11 @@ body {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
+/* Ховаємо бургер на комп'ютері (Він з'явиться тільки на телефоні) */
+.mobile-menu-toggle {
+    display: none;
+}
+
 /* СТАН ПРИ СКРОЛІ (Зменшений і білий) */
 .header.scrolled {
     height: 60px; /* Стискається! */
@@ -1900,4 +1905,105 @@ body {
             transform: translate(50%, -7px);
         }
     }
+}
+
+/* ==================================== */
+/* 21. МОБІЛЬНА АДАПТАЦІЯ (Фінал) */
+/* ==================================== */
+@media (max-width: 900px) {
+    
+    /* 1. Шрифти та відступи */
+    .section-title { font-size: 2em; margin-bottom: 30px; }
+    .hero-content h1 { font-size: 2.2em; }
+    .hero-content p { font-size: 1.1em; }
+    .container { padding: 0 20px; }
+
+    /* 2. Шапка і Меню */
+    .header { height: 70px; }
+    
+    .mobile-menu-toggle {
+        display: block; /* Показуємо кнопку меню */
+        font-size: 1.8em;
+        cursor: pointer;
+        color: #333;
+        z-index: 2000;
+    }
+    
+    .mobile-menu-toggle.active {
+        color: #7ab317; /* Зелений, коли відкрито */
+        transform: rotate(90deg); /* Повертаємо хрестик */
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Меню сховане справа */
+        width: 100%;
+        height: 100vh;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .nav-menu.active {
+        right: 0; /* Меню виїжджає */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .nav-links li a { font-size: 1.5em; }
+    .header-actions { display: none; } /* Ховаємо кнопки в шапці */
+
+    /* 3. Блоки стають у стовпчик */
+    .about-container, 
+    .teaser-container,
+    .contact-wrapper,
+    .service-row, 
+    .service-row.reverse {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .service-row, .service-row.reverse {
+        flex-direction: column-reverse; /* Картинка зверху */
+    }
+
+    .about-image-wrapper img, 
+    .contact-image img,
+    .service-img img {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    /* 4. Виправляємо 3D картки */
+    .pricing-grid { flex-direction: column; align-items: center; }
+    .flip-card { margin-bottom: 20px; width: 100%; max-width: 320px; }
+
+    /* 5. Галерея та Інстаграм */
+    .gallery-grid, .insta-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 в ряд */
+    }
+    
+    /* 6. Стрілочка вниз */
+    .scroll-down-btn {
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 20px;
+    }
+}
+
+/* Для дуже малих екранів */
+@media (max-width: 400px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .hero-content h1 { font-size: 1.8em; }
 }
