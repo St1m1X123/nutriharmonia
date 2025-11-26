@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriHarmonia | Контакти</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="navbar container">
+            <a href="index.html" class="logo-container">
+                <img src="nutriharmonia-logo.png" alt="Логотип"> 
+                <span class="logo-text">NutriHarmonia</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="about.html">Про мене</a></li>
+                    <li><a href="services.html">Послуги</a></li>
+                    <li><a href="consultation.html">Консультація</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://instagram.com/nutriharmonia" target="_blank" class="social-mini">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://t.me/yourtelegram" target="_blank" class="social-mini">
+                    <i class="fab fa-telegram-plane"></i>
+                </a>
+                <a href="contacts.html" class="header-btn">Зв'язатися</a>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="contact-hero">
+        <div class="contact-wrapper">
+            <div class="contact-content">
+                <h4>Є питання?</h4>
+                <h1>Давайте поспілкуємось!</h1>
+                <p>
+                    Я на зв'язку і готова допомогти вам розібратися з харчуванням. 
+                    Оберіть зручний месенджер — я відповідаю особисто.
+                </p>
+
+                <a href="https://t.me/yourtelegram" target="_blank" class="messenger-btn btn-telegram">
+                    <i class="fab fa-telegram-plane"></i>
+                    Написати в Telegram
+                </a>
+
+                <a href="https://instagram.com/nutriharmonia" target="_blank" class="messenger-btn btn-instagram">
+                    <i class="fab fa-instagram"></i>
+                    Написати в Instagram
+                </a>
+
+                <div class="contact-details">
+                    <div><i class="fas fa-envelope"></i><span>nutriharmonia@gmail.com</span></div>
+                    <div><i class="fas fa-clock"></i><span>Відповідаю: Пн-Пт з 10:00 до 19:00</span></div>
+                </div>
+            </div>
+
+            <div class="contact-image">
+                <img src="nastya-photo.jpg" alt="Настя NutriHarmonia">
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2>Записатися на консультацію</h2>
+                <p>Заповніть форму, і я напишу вам, щоб обрати зручний час.</p>
+                <form id="contactForm" action="https://formspree.io/f/ТВОЇ_ЛІТЕРИ" method="POST" novalidate>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Ваше ім'я</label>
+                        <input type="text" name="name" class="form-input" placeholder="Наприклад: Олена" required>
+                        <span class="error-message">Будь ласка, введіть ваше ім'я</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Де вам зручно відповісти?</label>
+                        <select name="messenger" class="form-select">
+                            <option value="telegram">Telegram</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="viber">Viber</option>
+                            <option value="whatsapp">WhatsApp</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ваш номер телефону або нікнейм</label>
+                        <input type="text" name="contact" class="form-input" placeholder="@nickname або +380..." required>
+                        <span class="error-message">Залиште контакт, щоб я могла написати</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Яка у вас ціль?</label>
+                        <select name="goal" class="form-select">
+                            <option value="consultation">Хочу консультацію</option>
+                            <option value="lose_weight">Схуднення</option>
+                            <option value="gain_weight">Набір ваги</option>
+                            <option value="health">Робота з аналізами / здоров'ям</option>
+                            <option value="other">Інше питання</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="form-btn">Відправити заявку</button>
+                    
+                    <p style="font-size: 0.8em; margin-top: 15px; margin-bottom: 0;">*Ваші дані залишаються конфіденційними</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img src="nutriharmonia-logo.png" alt="Логотип">
+                    <span>NutriHarmonia</span>
+                </div>
+                <p class="footer-text">
+                    Ваш персональний провідник у світ здорового харчування.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Карта сайту</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">Про мене</a></li>
+                    <li><a href="services.html">Послуги</a></li>
+                    <li><a href="consultation.html">Консультація</a></li>
+                    <li><a href="contacts.html">Контакти</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Контакти та Медіа</h4>
+                <p class="footer-text" style="margin-bottom: 10px; font-size: 0.9em; color: #999;">Дивіться рецепти:</p>
+                <div class="footer-socials" style="margin-bottom: 20px;">
+                    <a href="https://instagram.com/nutriharmonia" target="_blank" class="footer-social-btn">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com/@nutriharmonia" target="_blank" class="footer-social-btn">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+                <p class="footer-text" style="margin-bottom: 10px; font-size: 0.9em; color: #999;">Є питання? Пишіть:</p>
+                <div class="footer-socials">
+                    <a href="https://t.me/yourtelegram" target="_blank" class="footer-social-btn">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 NutriHarmonia. Всі права захищені. Розроблено з турботою про здоров'я.
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

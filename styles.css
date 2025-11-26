@@ -1,0 +1,1903 @@
+/* ==================================== */
+/* 1. БАЗОВІ СТИЛІ (Reset & Fonts) */
+/* ==================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+/* --- ВОТ ЭТОТ КОД УБИРАЕТ ПРЫЖКИ ЭКРАНА --- */
+html {
+    overflow-y: scroll; /* Полоса прокрутки будет всегда видна, поэтому сайт не будет дергаться */
+}
+
+
+body {
+    font-family: 'Montserrat', sans-serif; 
+    line-height: 1.6;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.section-title {
+    font-size: 2.8em;
+    color: #222;
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==================================== */
+/* 2. ШАПКА (ДИНАМІЧНА & ЛЕГКА) */
+/* ==================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    /* ПОЧАТКОВИЙ СТАН (Великий і прозорий) */
+    height: 80px; 
+    background: transparent; 
+    
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    
+    /* Плавний перехід для фону, висоти і тіні */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+/* СТАН ПРИ СКРОЛІ (Зменшений і білий) */
+.header.scrolled {
+    height: 60px; /* Стискається! */
+    background: rgba(255, 255, 255, 0.9); /* Стає білим */
+    backdrop-filter: blur(10px); /* Ефект скла */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* Легка тінь */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- ЛОГОТИП --- */
+/* Тепер це посилання (a), а не div */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none; /* Прибираємо підкреслення */
+    cursor: pointer;
+}
+
+.logo-container img {
+    height: 65px; /* БУЛО 45px -> СТАЛО 65px (Більший) */
+    transition: height 0.4s ease; 
+}
+
+/* Зменшуємо логотип при скролі */
+.header.scrolled .logo-container img {
+    height: 50px; /* БУЛО 35px -> СТАЛО 50px */
+}
+
+.logo-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.6em; /* Трохи збільшив шрифт */
+    font-weight: 700; 
+    color: #4a7d0e;
+    padding-bottom: 5px;
+    display: inline-block;
+    transition: font-size 0.4s ease;
+}
+
+.header.scrolled .logo-text {
+    font-size: 2.0em; 
+}
+
+.header.scrolled .logo-text {
+    font-size: 1.8em; 
+}
+
+/* --- МЕНЮ --- */
+.nav-menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #7ab317;
+    transform: translateX(-50%);
+    transition: width 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #7ab317;
+}
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+/* --- ПРАВА ЧАСТИНА (КНОПКА) --- */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-mini {
+    color: #333;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+.social-mini:hover {
+    color: #7ab317;
+}
+
+.header-btn {
+    background-color: #7ab317;
+    color: white;
+    text-decoration: none;
+    
+    /* Початковий розмір кнопки */
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 0.9em;
+    font-weight: 700;
+    
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 10px rgba(122, 179, 23, 0.3);
+}
+
+/* Зменшуємо кнопку при скролі, щоб вона влізла у вузьку шапку */
+.header.scrolled .header-btn {
+    padding: 8px 20px; /* Стає компактнішою */
+    font-size: 0.85em;
+}
+
+.header-btn:hover {
+    background-color: #4a7d0e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(122, 179, 23, 0.4);
+}
+
+.mobile-menu-toggle {
+    display: none;
+}
+
+/* ==================================== */
+/* 3. HERO СЕКЦІЯ (ЧИСТИЙ ГРАДІЄНТНИЙ ФОН) */
+/* ==================================== */
+.hero-section {
+    /* Важно: мин. высота 100vh = на весь экран */
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Фон начинается от самого верха, шапка лежит ПОВЕРХ него */
+    background: linear-gradient(180deg, #f0fff0 0%, #ffffff 70%, #fcfcfc 100%);
+    padding: 0 20px; /* Отступы только по бокам */
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px; 
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 4em; 
+    color: #222; 
+    margin-bottom: 0.3em;
+    font-weight: 800;
+    line-height: 1.1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); 
+}
+
+.hero-content p {
+    font-size: 1.5em; 
+    color: #555; 
+    margin-bottom: 2em;
+    text-shadow: none;
+}
+
+/* ==================================== */
+/* 4. СТИЛІ КНОПОК */
+/* ==================================== */
+.btn-primary {
+    display: inline-block;
+    padding: 18px 45px;
+    background-color: #7ab317;
+    color: white;
+    text-decoration: none; 
+    border-radius: 50px; 
+    font-size: 1.2em;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(122, 179, 23, 0.4); 
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #4a7d0e; 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(122, 179, 23, 0.5);
+}
+
+.btn-secondary {
+    padding: 18px 45px;
+    background-color: transparent;
+    border: 2px solid #7ab317;
+    color: #7ab317;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #7ab317;
+    color: white;
+}
+
+/* ==================================== */
+/* 5. СЕКЦІЯ ПЕРЕВАГ (ПРО НАС) */
+/* ==================================== */
+.about-us {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #fcfcfc;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 40px; 
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s;
+    border-left: 5px solid #7ab317;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.icon-large {
+    font-size: 2.5em;
+    color: #7ab317;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    color: #4a7d0e; 
+    margin-bottom: 10px;
+    font-size: 1.7em;
+    font-weight: 700;
+}
+
+/* ==================================== */
+/* 6. СЕКЦІЯ ТАРИФІВ (REAL 3D FLIP) - ВИПРАВЛЕНА */
+/* ==================================== */
+.pricing-section {
+    padding: 100px 20px;
+    background-color: #f9fcf9;
+    perspective: 1000px; /* 3D глибина */
+    text-align: center;
+}
+
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px; 
+    flex-wrap: wrap; 
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* КОНТЕЙНЕР (Розмір картки) */
+.flip-card {
+    background-color: transparent;
+    width: 340px;      /* ФІКСОВАНА ШИРИНА */
+    height: 540px;     /* ФІКСОВАНА ВИСОТА */
+    perspective: 1000px;
+    cursor: pointer;
+    margin-bottom: 30px; /* Відступ знизу, щоб не злипались на мобільному */
+}
+
+/* ВНУТРІШНЯ ЧАСТИНА */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-radius: 20px;
+}
+
+/* ЕФЕКТ ПРИ НАВЕДЕННІ */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* СТОРОНИ */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+/* ПЕРЕДНЯ СТОРОНА */
+.flip-card-front {
+    background-color: #ffffff;
+    color: #333;
+    border: 2px solid #f0f0f0;
+    z-index: 2; /* Щоб точно була зверху */
+}
+
+/* ЗАДНЯ СТОРОНА */
+.flip-card-back {
+    background: linear-gradient(135deg, #7ab317 0%, #558b2f 100%);
+    color: white;
+    transform: rotateY(180deg);
+    z-index: 1;
+}
+
+/* ЕЛЕМЕНТИ */
+.flip-icon {
+    font-size: 4em;
+    color: #7ab317;
+    margin-bottom: 25px;
+}
+
+.flip-title {
+    font-size: 2em;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.flip-desc {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.flip-price {
+    font-size: 2.2em;
+    color: #7ab317;
+    font-weight: 800;
+    margin-top: auto; 
+}
+
+/* СПИСОК */
+.flip-list {
+    list-style: none;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.flip-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.3);
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+}
+
+.flip-list li i {
+    margin-right: 10px;
+    color: #c8e6c9;
+}
+
+/* КНОПКА */
+.flip-btn {
+    background-color: white;
+    color: #7ab317;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.flip-btn:hover {
+    transform: scale(1.05);
+    background-color: #f1f1f1;
+}
+
+/* ХІТ */
+.popular-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ffc107;
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8em;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
+/* ==================================== */
+/* 7. ВЕЛИКИЙ ФУТЕР (PREMIUM FOOTER) */
+/* ==================================== */
+.footer {
+    background-color: #1a1a1a; /* Темний, майже чорний фон */
+    color: #ecf0f1;
+    padding: 60px 20px 20px 20px;
+    font-size: 0.95em;
+    border-top: 5px solid #7ab317; /* Зелена лінія зверху */
+    position: relative;
+    z-index: 10; /* Футер поверх усього */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Колонка футера */
+.footer-col {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Лого в футері */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.footer-logo img {
+    height: 50px;
+    /* Магия CSS: */
+    /* 1. Если логотип цветной (PNG), мы делаем его полностью белым */
+    filter: brightness(0) invert(1); 
+    /* brightness(0) делает его черным, invert(1) превращает черный в белый */
+    
+    display: block;
+}
+.footer-logo span {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: white;
+}
+
+.footer-text {
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Заголовки колонок */
+.footer-col h4 {
+    font-size: 1.2em;
+    color: white;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #7ab317;
+}
+
+/* Список посилань (Карта сайту) */
+.footer-links {
+    list-style: none;
+}
+.footer-links li {
+    margin-bottom: 12px;
+}
+.footer-links a {
+    color: #bbb;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+.footer-links a:hover {
+    color: #7ab317;
+    transform: translateX(5px); /* Зсув вправо при наведенні */
+}
+
+/* Соцмережі в футері */
+.footer-socials {
+    display: flex;
+    gap: 15px;
+}
+.footer-social-btn {
+    width: 45px;
+    height: 45px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.footer-social-btn:hover {
+    background-color: #7ab317;
+    transform: translateY(-3px);
+}
+.footer-social-btn i {
+    font-size: 1.2em;
+}
+
+/* Нижній копірайт */
+.footer-bottom {
+    margin-top: 10px !important; /* Було 50px, стало 10px - діра зникне! */
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    text-align: center;
+    color: #777;
+    font-size: 0.85em;
+}
+
+/* ==================================== */
+/* 8. СТИЛІ АНІМАЦІЇ */
+/* ==================================== */
+.feature-card, .pricing-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==================================== */
+/* 9. МОДАЛЬНЕ ВІКНО (СПЛИВАЮЧЕ) */
+/* ==================================== */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    animation: modal-fadein 0.5s;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #7ab317;
+    text-decoration: none;
+}
+
+.modal-tg-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-tg-btn i {
+    margin-right: 10px;
+}
+
+#modal-plan-name {
+    color: #7ab317;
+    font-weight: 700;
+}
+
+.modal-note {
+    display: block;
+    margin-top: 15px;
+    color: #888;
+    font-size: 0.9em;
+}
+
+@keyframes modal-fadein {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* ==================================== */
+/* 10. СТОРІНКА ПРО МЕНЕ (ABOUT.HTML) */
+/* ==================================== */
+
+/* СЕКЦИЯ ЗНАКОМСТВА (Hero) */
+.about-hero {
+    padding-top: 140px; /* Теж відштовхуємо контент вниз */
+    padding-bottom: 100px;
+    padding: 100px 20px;
+    background-color: #fff;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px; /* Расстояние между фото и текстом */
+    flex-wrap: wrap; /* Чтобы на телефоне переносилось */
+}
+
+/* Текст */
+.about-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+}
+
+.about-text .subtitle {
+    color: #7ab317;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.about-text h1 {
+    font-size: 3.5em;
+    color: #222;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.about-text .bio {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.signature {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    color: #7ab317;
+    margin-top: 30px;
+    transform: rotate(-5deg); /* Легкий наклон для реализма */
+}
+
+/* Фото */
+.about-image-wrapper {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    position: relative;
+}
+
+.profile-photo {
+    width: 100%;
+    border-radius: 20px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Декоративная рамка под фото */
+.photo-frame {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #7ab317;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+/* СЕКЦИЯ ОБРАЗОВАНИЯ (СПИСОК) */
+.education-section {
+    padding: 80px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.education-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.edu-item {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    text-align: left; /* Текст внутри карточки слева */
+}
+
+.edu-item:hover {
+    transform: translateX(10px); /* Сдвиг при наведении */
+    border-left: 5px solid #7ab317;
+}
+
+.edu-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #e8f5e9;
+    color: #7ab317;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.edu-content h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.edu-content p {
+    color: #666;
+    font-size: 0.95em;
+}
+
+/* CTA SECTION */
+.cta-section {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+.cta-section h2 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 2.5em;
+}
+
+/* ==================================== */
+/* 11. СЕКЦІЯ ВІДГУКІВ (REVIEWS) */
+/* ==================================== */
+.reviews-section {
+    padding: 80px 20px;
+    background-color: #e8f5e9; /* Світло-зелений фон, щоб виділити секцію */
+    text-align: center;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.review-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    text-align: left;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Велика іконка цитати для декору */
+.quote-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2em;
+    color: #e8f5e9; /* Дуже світла, ледь помітна */
+}
+
+.stars {
+    color: #ffc107; /* Золотий колір для зірок */
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.review-text {
+    color: #555;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+/* Блок з інформацією про клієнта */
+.client-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.client-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.client-info h4 {
+    font-size: 1em;
+    color: #333;
+    margin: 0;
+}
+
+.client-info span {
+    font-size: 0.85em;
+    color: #7ab317; /* Зелений колір для назви програми */
+    font-weight: 600;
+}
+
+/* ==================================== */
+/* 12. НОВІ СЕКЦІЇ ГОЛОВНОЇ СТОРІНКИ */
+/* ==================================== */
+
+/* 1. БОЛІ (Pain Points) */
+.pain-section {
+    padding: 80px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.pain-card {
+    padding: 30px;
+    border-radius: 15px;
+    background: #fff;
+    border: 1px solid #eee;
+    transition: transform 0.3s;
+}
+
+.pain-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: #7ab317;
+}
+
+.pain-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.pain-card h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* ==================================== */
+/* 13. ТИЗЕР ЕКСПЕРТА (CLEAN VERSION) */
+/* ==================================== */
+.expert-teaser-section {
+    padding: 100px 20px;
+    background-color: #f9fcf9;
+}
+
+.teaser-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* --- ФОТО --- */
+.teaser-image {
+    flex-shrink: 0;
+}
+
+.teaser-image img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    object-fit: cover;
+    
+    /* Убрали все рамки. Только легкая тень для объема */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+    border: none; 
+}
+
+/* --- ТЕКСТ --- */
+.teaser-content {
+    max-width: 500px;
+    text-align: left;
+}
+
+.teaser-content .subtitle {
+    font-family: 'Montserrat', sans-serif;
+    color: #7ab317;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.teaser-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 3em;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.teaser-content p {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* --- КНОПКА (Правильный селектор) --- */
+/* Мы используем полный путь, чтобы перебить старые стили без !important */
+.expert-teaser-section .teaser-content .btn-secondary {
+    display: inline-block;
+    text-decoration: none; /* Убираем подчеркивание текста */
+    border-bottom: none;   /* Убираем линию снизу */
+    
+    /* Задаем нашу красивую рамку */
+    border: 2px solid #7ab317; 
+    border-radius: 50px;
+    
+    /* Отступы и текст */
+    padding: 14px 40px;
+    font-size: 1.1em;
+    font-weight: 700;
+    background-color: transparent;
+    color: #333;
+    
+    margin-top: 25px;
+    transition: all 0.3s ease;
+}
+
+/* Наведение */
+.expert-teaser-section .teaser-content .btn-secondary:hover {
+    background-color: #7ab317;
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(122, 179, 23, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .teaser-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .teaser-content {
+        text-align: center;
+    }
+}
+
+/* 3. ГАЛЕРЕЯ ЇЖІ */
+.food-gallery-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+
+.gallery-item {
+    position: relative;
+    height: 250px;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1); /* Зум при наведенні */
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3); /* Затемнення */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+.overlay span {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2em;
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+/* 4. FAQ (Акордеон) */
+.faq-section {
+    padding: 80px 20px;
+    background-color: #fff;
+}
+
+.faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px;
+    text-align: left;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.faq-question i {
+    transition: transform 0.3s;
+    color: #7ab317;
+}
+
+.faq-question.active i {
+    transform: rotate(180deg); /* Поворот стрілки */
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 20px;
+}
+
+.faq-answer p {
+    padding-bottom: 20px;
+    color: #666;
+}
+
+/* 5. INSTAGRAM */
+.insta-section {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #fafafa;
+}
+
+.insta-logo-icon {
+    font-size: 3em;
+    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.insta-subtitle {
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.insta-btn {
+    background-color: transparent; /* Прозорий фон */
+    color: #333; /* Темний текст */
+    border: 2px solid #E1306C; /* Рожева рамка (колір Instagram) */
+    font-weight: 700;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    margin-bottom: 40px;
+}
+
+.insta-btn:hover {
+    background-color: #E1306C; /* При наведенні стає рожевою */
+    color: white;
+    box-shadow: 0 5px 15px rgba(225, 48, 108, 0.3);
+}
+
+.insta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.insta-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: opacity 0.3s;
+}
+
+.insta-grid img:hover {
+    opacity: 0.8;
+}
+
+.insta-btn i {
+    color: #E1306C; /* Іконка теж рожева */
+    font-size: 1.2em;
+}
+
+
+.insta-btn:hover i {
+    color: white;
+}
+
+/* ==================================== */
+/* 14. СТОРІНКА ПОСЛУГ (SERVICES.HTML) */
+/* ==================================== */
+
+/* 1. SERVICES HERO */
+.services-hero {
+    padding: 180px 20px 100px 20px; /* Великий відступ зверху */
+    background: linear-gradient(135deg, #f9fcf9 0%, #e8f5e9 100%);
+    text-align: center;
+}
+
+.subtitle-green {
+    color: #7ab317;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.services-hero h1 {
+    font-size: 3.5em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.services-hero p {
+    font-size: 1.2em;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* 2. ПРОЦЕС РОБОТИ (Кроки) */
+.process-section {
+    padding: 100px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.process-step {
+    position: relative;
+    padding: 20px;
+}
+
+.step-number {
+    font-size: 4em;
+    font-weight: 900;
+    color: #f0f0f0; /* Дуже світлий сірий, для фону */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.step-icon {
+    font-size: 2.5em;
+    color: #7ab317;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.process-step h3 {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.process-step p {
+    position: relative;
+    z-index: 2;
+    color: #666;
+    font-size: 0.95em;
+}
+
+/* 3. ДЕТАЛІ ПОСЛУГ (Рядки) */
+.services-details {
+    padding: 80px 20px;
+    background-color: #fcfcfc;
+}
+
+.service-row {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 100px; /* Відступ між блоками */
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Реверс для другого блоку (картинка зліва) */
+.service-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.service-text {
+    flex: 1;
+}
+
+.service-icon {
+    font-size: 2em;
+    color: #7ab317;
+    margin-bottom: 20px;
+}
+
+.service-text h3 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.service-list {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.service-list li {
+    margin-bottom: 10px;
+    font-size: 1.05em;
+    color: #555;
+}
+
+.service-list li i {
+    color: #7ab317;
+    margin-right: 10px;
+}
+
+.service-img {
+    flex: 1;
+}
+
+.service-img img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Адаптація для мобільних */
+@media (max-width: 768px) {
+    .service-row, .service-row.reverse {
+        flex-direction: column-reverse; /* Текст завжди знизу на телефоні */
+        gap: 30px;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    
+    .service-list {
+        text-align: left; /* Список лишаємо зліва */
+        display: inline-block;
+    }
+}
+
+/* ==================================== */
+/* 15. СТИЛІ ДЛЯ СТОРІНКИ ПОСЛУГ (ДОДАТОК) */
+/* ==================================== */
+
+/* ПОРІВНЯЛЬНА ТАБЛИЦЯ */
+.comparison-section {
+    padding: 80px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.table-responsive {
+    overflow-x: auto; /* Щоб на телефоні можна було гортати таблицю */
+}
+
+.comparison-table {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.comparison-table th {
+    background-color: #7ab317;
+    color: white;
+    padding: 20px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+.comparison-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-table tr:hover {
+    background-color: #f9fcf9; /* Підсвітка рядка при наведенні */
+}
+
+.feature-name {
+    text-align: left;
+    font-weight: 600;
+    color: #333 !important;
+    width: 40%; /* Перша колонка ширша */
+}
+
+.check-yes {
+    color: #7ab317;
+    font-size: 1.3em;
+}
+
+/* Дрібні правки для карток цін, щоб вони влізли красиво */
+.price {
+    font-size: 2em;
+    font-weight: 800;
+    color: #7ab317;
+    margin: 10px 0 20px 0;
+}
+
+.pricing-card ul li i {
+    min-width: 25px; /* Вирівнювання іконок */
+}
+
+/* ==================================== */
+/* 16. СТОРІНКА КОНТАКТІВ (НОВІ СТИЛІ) */
+/* ==================================== */
+.contact-hero {
+    padding: 120px 20px 80px 20px; /* Відступи зверху, щоб не налізло на шапку */
+    background-color: #fff;
+    min-height: 80vh; /* На весь екран */
+    display: flex;
+    align-items: center;
+}
+
+.contact-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Ліва частина - Текст */
+.contact-content {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.contact-content h1 {
+    font-size: 3em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.contact-content p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Права частина - Фото */
+.contact-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+}
+
+.contact-image img {
+    width: 100%;
+    border-radius: 20px;
+    /* Тінь та легкий поворот для стилю */
+    box-shadow: 20px 20px 0px #e8f5e9; 
+}
+
+/* КНОПКИ МЕСЕНДЖЕРІВ */
+.messenger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1em;
+    color: white;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.messenger-btn i {
+    font-size: 1.4em;
+}
+
+.messenger-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Колір Телеграму */
+.btn-telegram {
+    background-color: #2AABEE;
+    box-shadow: 0 5px 15px rgba(42, 171, 238, 0.3);
+}
+
+/* Колір Інстаграму (Градієнт) */
+.btn-instagram {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    box-shadow: 0 5px 15px rgba(220, 39, 67, 0.3);
+}
+
+/* Додаткова інфо (пошта) */
+.contact-details {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.contact-details div {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.contact-details i {
+    color: #7ab317;
+}
+
+/* ==================================== */
+/* 17. СЕКЦІЯ З ФОРМОЮ (Додаток до контактів) */
+/* ==================================== */
+.form-section {
+    padding: 80px 20px;
+    background-color: #f9fcf9; /* Дуже світлий зеленуватий фон */
+    text-align: center;
+}
+
+.form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-top: 5px solid #7ab317;
+}
+
+.form-wrapper h2 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 2em;
+}
+
+.form-wrapper p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Стиль полів вводу */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #444;
+}
+
+.form-input, .form-select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s;
+    outline: none;
+    background-color: #fafafa;
+}
+
+/* Ефект при натисканні */
+.form-input:focus, .form-select:focus {
+    border-color: #7ab317;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(122, 179, 23, 0.1);
+}
+
+/* Кнопка відправки */
+.form-btn {
+    width: 100%;
+    padding: 18px;
+    background-color: #7ab317;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(122, 179, 23, 0.3);
+}
+
+.form-btn:hover {
+    background-color: #4a7d0e;
+    transform: translateY(-2px);
+}
+
+/* ==================================== */
+/* 18. СТИЛІ ДЛЯ ПОМИЛОК ФОРМИ */
+/* ==================================== */
+
+/* Коли поле з помилкою */
+.form-input.error, 
+.form-select.error {
+    border-color: #ff6b6b !important; /* Червона рамка */
+    background-color: #fff5f5 !important; /* Легкий рожевий фон */
+    box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.1) !important;
+    animation: shake 0.3s ease-in-out; /* Поле "потруситься" */
+}
+
+/* Текст помилки під полем */
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: none; /* Сховано за замовчуванням */
+    font-weight: 500;
+}
+
+/* Показуємо текст, якщо батьківський блок має клас active-error */
+.form-group.active-error .error-message {
+    display: block;
+}
+
+/* Анімація "трусіння" головою (ні-ні-ні) */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ==================================== */
+/* 19. БЛОК "РАЗОВА КОНСУЛЬТАЦІЯ" (ВСТАВКА) */
+/* ==================================== */
+.consult-promo {
+    margin-top: 60px;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    
+    /* Змінив сіру рамку на легку зелену */
+    border: 2px solid #e8f5e9; 
+    text-align: left;
+}
+
+/* Зелена смужка збоку (БУЛО #333 -> СТАЛО #7ab317) */
+.consult-promo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 8px;
+    background-color: #7ab317; /* ТЕПЕР ЗЕЛЕНА */
+}
+
+.consult-text h3 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.consult-text p {
+    color: #666;
+    font-size: 1.1em;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.consult-action {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-shrink: 0;
+}
+
+/* Ціна (БУЛО #333 -> СТАЛО #7ab317) */
+.consult-price {
+    font-size: 2em;
+    font-weight: 800;
+    color: #7ab317; /* ТЕПЕР ЗЕЛЕНА */
+}
+
+/* Кнопка (БУЛО #333 -> СТАЛО #7ab317) */
+/* Я залишив клас .btn-dark, щоб не ламати HTML, але перефарбував його */
+.btn-dark {
+    background-color: #7ab317; /* ТЕПЕР ЗЕЛЕНА */
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(122, 179, 23, 0.3); /* Зелена тінь */
+}
+
+.btn-dark:hover {
+    background-color: #4a7d0e; /* Темніша зелена при наведенні */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(122, 179, 23, 0.4);
+}
+
+/* Адаптив для телефону */
+@media (max-width: 900px) {
+    .consult-promo {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .consult-promo::before {
+        width: 100%;
+        height: 8px; /* Смужка зверху */
+    }
+    .consult-action {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    .btn-dark {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ==================================== */
+/* 20. СТРІЛКА ВНИЗ (НА ГОЛОВНІЙ) */
+/* ==================================== */
+
+/* 1. БАЗОВІ СТИЛІ (ДЛЯ ВСІХ) */
+.scroll-down-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    color: #7ab317;
+    font-size: 2.5em;
+    animation: bounce 2s infinite; /* Стрибає */
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.5s ease; /* Плавність зникнення */
+}
+
+.scroll-down-btn:hover {
+    color: #4a7d0e;
+}
+
+/* 2. КЛАС ДЛЯ ЗНИКНЕННЯ (ТЕПЕР ВІН ЗОВНІ - ПРАЦЮЄ ВСЮДИ) */
+.scroll-down-btn.hidden {
+    opacity: 0;           /* Стає прозорою */
+    visibility: hidden;   /* Прибираємо з видимості */
+    pointer-events: none; /* Щоб не можна було клікнути */
+}
+
+/* 3. АНІМАЦІЯ СТРИБАННЯ (Для ПК) */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    60% {
+        transform: translateY(-7px);
+    }
+}
+
+/* 4. МОБІЛЬНА ВЕРСІЯ (Тільки центрування) */
+@media (max-width: 768px) {
+    .scroll-down-btn {
+        right: 50%; /* Зсуваємо на середину */
+        bottom: 20px;
+        /* Важливо: використовуємо transform, щоб відцентрувати */
+        transform: translateX(50%); 
+    }
+
+    /* Переписуємо анімацію для мобільного, щоб врахувати центрування по X */
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translate(50%, 0);
+        }
+        40% {
+            transform: translate(50%, -15px);
+        }
+        60% {
+            transform: translate(50%, -7px);
+        }
+    }
+}
