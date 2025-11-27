@@ -1908,36 +1908,34 @@ body {
 }
 
 /* ==================================== */
-/* 21. МОБІЛЬНА АДАПТАЦІЯ (Фінал) */
+/* 21. МОБІЛЬНА АДАПТАЦІЯ (Фінальна версія) */
 /* ==================================== */
 @media (max-width: 900px) {
     
-    /* 1. Шрифти та відступи */
+    /* --- 1. ЗАГАЛЬНІ ЗМЕНШЕННЯ --- */
     .section-title { font-size: 2em; margin-bottom: 30px; }
     .hero-content h1 { font-size: 2.2em; }
     .hero-content p { font-size: 1.1em; }
     .container { padding: 0 20px; }
-
-    /* 2. Шапка і Меню */
     .header { height: 70px; }
-    
+    .header-actions { display: none; } /* Ховаємо кнопки шапки */
+
+    /* --- 2. МЕНЮ-БУРГЕР --- */
     .mobile-menu-toggle {
-        display: block; /* Показуємо кнопку меню */
+        display: block;
         font-size: 1.8em;
         cursor: pointer;
         color: #333;
         z-index: 2000;
     }
-    
     .mobile-menu-toggle.active {
-        color: #7ab317; /* Зелений, коли відкрито */
-        transform: rotate(90deg); /* Повертаємо хрестик */
+        color: #7ab317;
+        transform: rotate(90deg);
     }
-
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%; /* Меню сховане справа */
+        right: -100%;
         width: 100%;
         height: 100vh;
         background: white;
@@ -1946,64 +1944,112 @@ body {
         justify-content: center;
         align-items: center;
         transition: right 0.4s ease;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        z-index: 1000;
     }
+    .nav-menu.active { right: 0; }
+    .nav-links { flex-direction: column; gap: 30px; text-align: center; }
+    .nav-links li a { font-size: 1.5em; }
 
-    .nav-menu.active {
-        right: 0; /* Меню виїжджає */
-    }
-
-    .nav-links {
+    /* --- 3. БЛОКИ В СТОВПЧИК --- */
+    .about-container, .teaser-container, .contact-wrapper, 
+    .service-row, .service-row.reverse {
         flex-direction: column;
         gap: 30px;
         text-align: center;
     }
-
-    .nav-links li a { font-size: 1.5em; }
-    .header-actions { display: none; } /* Ховаємо кнопки в шапці */
-
-    /* 3. Блоки стають у стовпчик */
-    .about-container, 
-    .teaser-container,
-    .contact-wrapper,
-    .service-row, 
-    .service-row.reverse {
-        flex-direction: column;
-        gap: 40px;
-        text-align: center;
+    .service-row, .service-row.reverse { flex-direction: column-reverse; }
+    .about-image-wrapper img, .contact-image img, .service-img img {
+        width: 100%; max-width: 400px; margin: 0 auto;
     }
 
-    .service-row, .service-row.reverse {
-        flex-direction: column-reverse; /* Картинка зверху */
-    }
-
-    .about-image-wrapper img, 
-    .contact-image img,
-    .service-img img {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    /* 4. Виправляємо 3D картки */
-    .pricing-grid { flex-direction: column; align-items: center; }
-    .flip-card { margin-bottom: 20px; width: 100%; max-width: 320px; }
-
-    /* 5. Галерея та Інстаграм */
-    .gallery-grid, .insta-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 в ряд */
+    /* --- 4. ГОРИЗОНТАЛЬНА КАРУСЕЛЬ ТАРИФІВ (Гібрид) --- */
+    .pricing-grid {
+        display: flex;       /* В ряд */
+        flex-direction: row; 
+        overflow-x: auto;    /* Дозволяємо скрол вбік */
+        gap: 20px;
+        padding: 10px 20px 40px 20px; /* Місце знизу для тіні */
+        scroll-snap-type: x mandatory; /* Магніт */
+        -webkit-overflow-scrolling: touch;
+        align-items: stretch; /* Щоб картки були однієї висоти */
     }
     
-    /* 6. Стрілочка вниз */
+    /* Ховаємо скролбар для краси */
+    .pricing-grid::-webkit-scrollbar { display: none; }
+
+    .flip-card {
+        flex: 0 0 85%; /* Картка займає 85% ширини екрану */
+        max-width: 320px;
+        height: auto;  /* Висота залежить від контенту */
+        scroll-snap-align: center; /* Центрування при свайпі */
+        perspective: none; /* ВИМИКАЄМО 3D перспективу */
+        margin-bottom: 0;
+    }
+
+    /* Вимикаємо обертання внутрішнього контейнера */
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: auto;
+        transform: none !important; /* Забороняємо поворот */
+        transition: none;
+        display: flex;
+        flex-direction: column; /* Ставимо перед і зад один під одним */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Тінь тепер тут */
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    
+    /* Відключаємо поворот при наведенні/кліку */
+    .flip-card:hover .flip-card-inner,
+    .flip-card.hover .flip-card-inner {
+        transform: none !important;
+    }
+
+    /* Налаштування Лицьової Сторони (Верх картки) */
+    .flip-card-front {
+        position: relative; /* Не абсолютна! */
+        top: auto; left: auto;
+        height: auto;
+        width: 100%;
+        backface-visibility: visible;
+        transform: none !important;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-bottom: 10px; /* Менший відступ знизу */
+        z-index: 2;
+    }
+    
+    /* Ховаємо підказку "(Наведіть для деталей)" на телефоні */
+    .flip-card-front p[style*="font-size: 0.8em"] {
+        display: none;
+    }
+
+    /* Налаштування Тильної Сторони (Низ картки) */
+    .flip-card-back {
+        position: relative; /* Стає просто блоком знизу */
+        top: auto; left: auto;
+        height: auto;
+        width: 100%;
+        backface-visibility: visible;
+        transform: none !important; /* Розвертаємо назад обличчям */
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        padding-top: 20px;
+        /* Градієнт залишається, виглядає як футер картки */
+    }
+
+    /* --- 5. ГАЛЕРЕЯ --- */
+    .gallery-grid, .insta-grid { grid-template-columns: repeat(2, 1fr); }
+    
+    /* --- 6. СТРІЛКА ВНИЗ --- */
     .scroll-down-btn {
         right: 50%;
         transform: translateX(50%);
         bottom: 20px;
     }
-}
-
-/* Для дуже малих екранів */
-@media (max-width: 400px) {
-    .gallery-grid { grid-template-columns: 1fr; }
-    .hero-content h1 { font-size: 1.8em; }
+    @keyframes bounce {
+        0%, 100% { transform: translate(50%, 0); }
+        50% { transform: translate(50%, -15px); }
+    }
 }
