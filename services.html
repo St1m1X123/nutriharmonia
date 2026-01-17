@@ -232,7 +232,7 @@
                                 <li><i class="fas fa-check"></i> Список продуктів</li>
                                 <li><i class="fas fa-check"></i> 1 загальна консультація</li>
                             </ul>
-                            <a href="contacts.html" class="flip-btn">Замовити</a>
+                            <a href="#" class="flip-btn open-modal-btn">Замовити</a>
                         </div>
                     </div>
                 </div>
@@ -255,7 +255,7 @@
                                 <li><i class="fas fa-check"></i> Підбір вітамінів</li>
                                 <li><i class="fas fa-check"></i> Чат-підтримка (1 міс.)</li>
                             </ul>
-                            <a href="contacts.html" class="flip-btn">Обрати Баланс</a>
+                            <a href="#" class="flip-btn open-modal-btn">Обрати Баланс</a>
                         </div>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                                 <li><i class="fas fa-check"></i> Спеціалізовані раціони</li>
                                 <li><i class="fas fa-check"></i> Психологічна робота</li>
                             </ul>
-                            <a href="contacts.html" class="flip-btn" style="color: #7b1fa2;">Стати VIP</a>
+                            <a href="#" class="flip-btn open-modal-btn" style="color: #7b1fa2;">Стати VIP</a>
                         </div>
                     </div>
                 </div>
@@ -403,6 +403,76 @@
             &copy; 2025 NutriHarmonia. Всі права захищені. Розроблено з турботою про здоров'я.
         </div>
     </footer>
+    
+    <div class="form-modal-overlay">
+        <div class="form-modal-container">
+            <span class="close-form-btn">&times;</span>
+            <div class="form-wrapper-modal">
+                <h2>Замовити послугу</h2>
+                <p>Залиште заявку, і ми обговоримо деталі вашого плану.</p>
+                
+                <form id="serviceForm" action="https://formspree.io/f/ТВОЇ_ЛІТЕРИ" method="POST" class="modern-form" novalidate>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Ваше ім'я</label>
+                        <input type="text" name="name" class="form-input" placeholder="Наприклад: Олена" required>
+                        <div class="error-text-hint">Будь ласка, введіть ваше ім'я</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Де вам зручно відповісти?</label>
+                        <div class="custom-select-wrapper">
+                            <select name="messenger" style="display: none;">
+                                <option value="telegram">Telegram</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="viber">Viber</option>
+                            </select>
+                            <div class="custom-select-trigger">
+                                <span><i class="fab fa-telegram-plane"></i> Telegram</span>
+                                <i class="fas fa-chevron-down arrow"></i>
+                            </div>
+                            <div class="custom-options">
+                                <div class="custom-option selected" data-value="telegram"><i class="fab fa-telegram-plane"></i> Telegram</div>
+                                <div class="custom-option" data-value="instagram"><i class="fab fa-instagram"></i> Instagram</div>
+                                <div class="custom-option" data-value="viber"><i class="fab fa-viber"></i> Viber</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ваш номер телефону або нікнейм</label>
+                        <input type="text" name="contact" class="form-input" placeholder="@nickname або +380..." required>
+                        <div class="error-text-hint">Залиште контакт для зв'язку</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Яка послуга вас цікавить?</label>
+                        <div class="custom-select-wrapper">
+                            <select name="goal" style="display: none;">
+                                <option value="lose_weight">Схуднення</option>
+                                <option value="consultation">Консультація</option>
+                                <option value="health">Робота з аналізами</option>
+                                <option value="other">Інше</option>
+                            </select>
+                            <div class="custom-select-trigger">
+                                <span>Схуднення</span>
+                                <i class="fas fa-chevron-down arrow"></i>
+                            </div>
+                            <div class="custom-options">
+                                <div class="custom-option selected" data-value="lose_weight">Схуднення</div>
+                                <div class="custom-option" data-value="consultation">Консультація</div>
+                                <div class="custom-option" data-value="health">Робота з аналізами</div>
+                                <div class="custom-option" data-value="other">Інше</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-btn">Відправити заявку</button>
+                    <p style="font-size: 0.75em; color: #999; margin-top: 15px; text-align: center;">*Конфіденційно</p>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

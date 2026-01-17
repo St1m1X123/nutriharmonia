@@ -93,32 +93,56 @@
         </div>
     </section>
 
-    <section class="education-section">
+    <section class="certificates-section">
         <div class="container">
-            <h2 class="section-title">Освіта та кваліфікація</h2>
-            <div class="education-list">
+            <h2 class="section-title" style="text-align: center;">Освіта та кваліфікація</h2>
+            <p style="text-align: center; margin-bottom: 50px; color: #666; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Моя експертність підтверджена сертифікатами провідних шкіл нутриціології.
+            </p>
+
+            <div class="cert-list">
                 
-                <div class="edu-item">
-                    <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <div class="edu-content">
-                        <h3>Сертифікований Нутриціолог</h3>
-                        <p>Академія Здоров'я та Харчування, 2023</p>
+                <div class="cert-item" data-img="certs/c1.png">
+                    <div class="cert-year-badge">2025</div>
+                    <div class="cert-info">
+                        <h3>4 кроки до здорового харчування</h3>
+                        <p class="cert-issuer">Платформа Prometheus</p>
+                    </div>
+                    <div class="cert-action">
+                        <span class="view-link">Дивитись <i class="fas fa-eye"></i></span>
                     </div>
                 </div>
 
-                <div class="edu-item">
-                    <div class="edu-icon"><i class="fas fa-apple-alt"></i></div>
-                    <div class="edu-content">
-                        <h3>Спеціаліст з корекції ваги</h3>
-                        <p>Курс "Психологія переїдання", 2024</p>
+                <div class="cert-item" data-img="certs/c2.png">
+                    <div class="cert-year-badge">2025</div>
+                    <div class="cert-info">
+                        <h3>Лабораторні аналізи у практиці нутриціолога</h3>
+                        <p class="cert-issuer">International School BALANCE</p>
+                    </div>
+                    <div class="cert-action">
+                        <span class="view-link">Дивитись <i class="fas fa-eye"></i></span>
                     </div>
                 </div>
 
-                <div class="edu-item">
-                    <div class="edu-icon"><i class="fas fa-scroll"></i></div>
-                    <div class="edu-content">
-                        <h3>Спортивна дієтологія</h3>
-                        <p>Базовий інтенсив для роботи зі спортсменами</p>
+                <div class="cert-item" data-img="certs/c3.png">
+                    <div class="cert-year-badge">2024</div>
+                    <div class="cert-info">
+                        <h3>Психологія Харчування</h3>
+                        <p class="cert-issuer">International School BALANCE</p>
+                    </div>
+                    <div class="cert-action">
+                        <span class="view-link">Дивитись <i class="fas fa-eye"></i></span>
+                    </div>
+                </div>
+
+                <div class="cert-item" data-img="certs/c4.png">
+                    <div class="cert-year-badge">2024</div>
+                    <div class="cert-info">
+                        <h3>Дієтологія і нутриціологія. Базовий рівень</h3>
+                        <p class="cert-issuer">International School BALANCE</p>
+                    </div>
+                    <div class="cert-action">
+                        <span class="view-link">Дивитись <i class="fas fa-eye"></i></span>
                     </div>
                 </div>
 
@@ -247,6 +271,11 @@
             &copy; 2025 NutriHarmonia. Всі права захищені. Розроблено з турботою про здоров'я.
         </div>
     </footer>
+
+    <div id="image-viewer" class="image-modal">
+        <span class="close-viewer">&times;</span>
+        <img class="image-modal-content" id="full-image">
+    </div>
     
     <script src="script.js"></script>
 </body>

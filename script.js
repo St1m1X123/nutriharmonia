@@ -30,36 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==================================================
-    // 2. МОДАЛЬНЕ ВІКНО (ЗАМОВЛЕННЯ)
-    // ==================================================
-    const modal = document.getElementById('modal-order');
-    const closeBtn = document.querySelector('.close-btn');
-    const orderBtns = document.querySelectorAll('.js-order-btn');
-    const planNameSpan = document.getElementById('modal-plan-name');
-    const formPlanInput = document.getElementById('form-plan-name');
-
-    if (modal && closeBtn) {
-        orderBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const planName = btn.getAttribute('data-plan'); 
-                if (planNameSpan) planNameSpan.innerText = planName;
-                if (formPlanInput) formPlanInput.value = planName;
-                modal.style.display = 'flex';
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) modal.style.display = 'none';
-        });
-    }
 
     // ==================================================
-    // 3. FAQ (АКОРДЕОН)
+    // 2. FAQ (АКОРДЕОН)
     // ==================================================
     document.querySelectorAll('.faq-question').forEach(question => {
         question.addEventListener('click', () => {
@@ -74,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==================================================
-    // 4. ШАПКА ТА СТРІЛКА (СКРОЛ)
+    // 3. ШАПКА ТА СТРІЛКА (СКРОЛ)
     // ==================================================
     const header = document.querySelector('.header');
     const scrollArrow = document.querySelector('.scroll-down-btn');
@@ -98,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==================================================
-    // 5. АНІМАЦІЯ ПОЯВИ
+    // 4. АНІМАЦІЯ ПОЯВИ
     // ==================================================
     const observer = new IntersectionObserver((entries) => {
        entries.forEach(entry => {
@@ -112,36 +85,219 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.feature-card, .pricing-card, .pain-card, .gallery-item, .service-row, .consult-promo, .flip-card').forEach(el => observer.observe(el));
 
     // ==================================================
-    // 6. ВАЛІДАЦІЯ ФОРМИ
+    // 5. ВАЛІДАЦІЯ ФОРМИ (З ВІБРАЦІЄЮ)
     // ==================================================
     const contactForm = document.getElementById('contactForm');
+
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             let hasError = false;
-            const inputs = contactForm.querySelectorAll('[required]');
 
-            inputs.forEach(input => {
+            // Знаходимо всі обов'язкові поля
+            const requiredInputs = contactForm.querySelectorAll('input[required]');
+
+            requiredInputs.forEach(input => {
+                const errorText = input.nextElementSibling; // Текст знизу
+
                 if (!input.value.trim()) {
+                    // --- ПОМИЛКА ---
                     hasError = true;
-                    input.classList.add('error');
-                    const parent = input.closest('.form-group');
-                    if (parent) parent.classList.add('active-error');
+                    
+                    // 1. Червона рамка (залишається)
+                    input.classList.add('input-error');
+                    
+                    // 2. Анімація тряски (додаємо і видаляємо через 0.5с)
+                    input.classList.add('shake-active');
+                    setTimeout(() => {
+                        input.classList.remove('shake-active');
+                    }, 500);
+
+                    // 3. Показати текст
+                    if (errorText && errorText.classList.contains('error-text-hint')) {
+                        errorText.style.display = 'block';
+                    }
+
                 } else {
-                    input.classList.remove('error');
-                    const parent = input.closest('.form-group');
-                    if (parent) parent.classList.remove('active-error');
+                    // --- ВСЕ ДОБРЕ ---
+                    input.classList.remove('input-error');
+                    if (errorText && errorText.classList.contains('error-text-hint')) {
+                        errorText.style.display = 'none';
+                    }
                 }
-                
+
+                // Прибираємо червоне, коли почали писати
                 input.addEventListener('input', function() {
-                    this.classList.remove('error');
-                    const parent = this.closest('.form-group');
-                    if (parent) parent.classList.remove('active-error');
+                    this.classList.remove('input-error');
+                    const currentErrorText = this.nextElementSibling;
+                    if (currentErrorText) currentErrorText.style.display = 'none';
                 });
             });
 
+            // Блокуємо відправку, якщо є помилки
             if (hasError) {
                 e.preventDefault();
             }
         });
     }
+    
+    // ==================================================
+    // 6. ГАЛЕРЕЯ (ВИПРАВЛЕНО КОНФЛІКТ ІМЕН)
+    // ==================================================
+    const certItems = document.querySelectorAll('.cert-item');
+    const imageViewer = document.getElementById('image-viewer');
+    const fullImage = document.getElementById('full-image');
+    const closeViewer = document.querySelector('.close-viewer');
+
+    // Функція відкриття ГАЛЕРЕЇ (перейменували)
+    const openGallery = (imgLink) => {
+        if (!imgLink) return;
+        
+        fullImage.src = imgLink;
+        imageViewer.classList.add('active'); 
+        
+        // Блокуємо скрол
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden'; 
+    };
+
+    // Функція закриття ГАЛЕРЕЇ (перейменували)
+    const closeGallery = () => {
+        imageViewer.classList.remove('active'); 
+        
+        // Відновлюємо скрол
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+
+        setTimeout(() => {
+            if(fullImage) fullImage.src = ''; 
+        }, 400);
+    };
+
+    if (imageViewer && fullImage) {
+        // Кліки по списку
+        certItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgLink = item.getAttribute('data-img');
+                openGallery(imgLink); // Викликаємо нову функцію
+            });
+        });
+
+        // Хрестик
+        if (closeViewer) {
+            closeViewer.addEventListener('click', closeGallery);
+        }
+
+        // Клік по фону
+        imageViewer.addEventListener('click', (e) => {
+            if (e.target === imageViewer) {
+                closeGallery();
+            }
+        });
+    }
+
+    // ==================================================
+    // 7. МОДАЛЬНЕ ВІКНО ФОРМИ (ВИПРАВЛЕНО КОНФЛІКТ ІМЕН)
+    // ==================================================
+    const modalOverlay = document.querySelector('.form-modal-overlay');
+    const closeFormBtn = document.querySelector('.close-form-btn');
+    const openModalBtns = document.querySelectorAll('.open-modal-btn'); 
+
+    // Функція відкриття ФОРМИ (перейменували)
+    const openForm = (e) => {
+        if (e) e.preventDefault();
+        if (modalOverlay) {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    // Функція закриття ФОРМИ (перейменували)
+    const closeForm = () => {
+        if (modalOverlay) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    // Вішаємо подію на кнопки
+    if (openModalBtns.length > 0) {
+        openModalBtns.forEach(btn => {
+            btn.removeEventListener('click', openForm); // Чистка на всяк випадок
+            btn.addEventListener('click', openForm);
+        });
+    }
+
+    // Закриття хрестиком
+    if (closeFormBtn) {
+        closeFormBtn.addEventListener('click', closeForm);
+    }
+
+    // Закриття кліком по фону
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeForm();
+            }
+        });
+    }
+
+    // Закриття через Esc
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('active')) {
+            closeForm();
+        }
+    });
+
+    // ==================================================
+    // 8. ЛОГІКА ДЛЯ КРАСИВИХ СПИСКІВ (DROPDOWN)
+    // ==================================================
+    const selectWrappers = document.querySelectorAll('.custom-select-wrapper');
+
+    selectWrappers.forEach(wrapper => {
+        const trigger = wrapper.querySelector('.custom-select-trigger');
+        const options = wrapper.querySelectorAll('.custom-option');
+        const hiddenSelect = wrapper.querySelector('select'); // Знаходимо справжній селект
+        const triggerText = wrapper.querySelector('span'); // Текст на кнопці
+
+        // 1. Відкрити/Закрити при кліку
+        trigger.addEventListener('click', (e) => {
+            // Закриваємо всі інші відкриті списки, якщо є
+            selectWrappers.forEach(otherWrapper => {
+                if (otherWrapper !== wrapper) otherWrapper.classList.remove('open');
+            });
+            wrapper.classList.toggle('open');
+            e.stopPropagation(); // Щоб клік не пішов далі
+        });
+
+        // 2. Вибір опції
+        options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Прибираємо клас selected у всіх і додаємо натиснутому
+                options.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                
+                // Оновлюємо текст на кнопці (з іконкою, якщо є)
+                triggerText.innerHTML = option.innerHTML;
+                
+                // Оновлюємо значення СПРАВЖНЬОГО прихованого селекту
+                const value = option.getAttribute('data-value');
+                hiddenSelect.value = value;
+                
+                // Закриваємо список
+                wrapper.classList.remove('open');
+            });
+        });
+    });
+
+    // 3. Закриття при кліку поза межами
+    document.addEventListener('click', (e) => {
+        selectWrappers.forEach(wrapper => {
+            if (!wrapper.contains(e.target)) {
+                wrapper.classList.remove('open');
+            }
+        });
+    });
+    
 });

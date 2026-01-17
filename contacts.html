@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriHarmonia | Контакти</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
     <header class="header">
         <div class="navbar container">
             <a href="index.html" class="logo-container">
-                <img src="nutriharmonia-logo.png" alt="Логотип"> 
+                <img src="nutriharmonia-logo.png" alt="Логотип">
                 <span class="logo-text">NutriHarmonia</span>
             </a>
-            
+
             <nav class="nav-menu">
                 <ul class="nav-links">
                     <li><a href="about.html">Про мене</a></li>
@@ -47,9 +51,14 @@
                 <h4>Є питання?</h4>
                 <h1>Давайте поспілкуємось!</h1>
                 <p>
-                    Я на зв'язку і готова допомогти вам розібратися з харчуванням. 
-                    Оберіть зручний месенджер — я відповідаю особисто.
+                    Я на зв'язку і готова допомогти вам розібратися з харчуванням.
+                    Оберіть зручний месенджер або запишіться через форму.
                 </p>
+
+                <button id="openFormBtn" class="messenger-btn btn-primary">
+                    <i class="fas fa-edit"></i>
+                    Записатися на консультацію
+                </button>
 
                 <a href="https://t.me/yourtelegram" target="_blank" class="messenger-btn btn-telegram">
                     <i class="fab fa-telegram-plane"></i>
@@ -69,54 +78,6 @@
 
             <div class="contact-image">
                 <img src="nastya-photo.jpg" alt="Настя NutriHarmonia">
-            </div>
-        </div>
-    </section>
-
-    <section class="form-section">
-        <div class="container">
-            <div class="form-wrapper">
-                <h2>Записатися на консультацію</h2>
-                <p>Заповніть форму, і я напишу вам, щоб обрати зручний час.</p>
-                <form id="contactForm" action="https://formspree.io/f/ТВОЇ_ЛІТЕРИ" method="POST" novalidate>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Ваше ім'я</label>
-                        <input type="text" name="name" class="form-input" placeholder="Наприклад: Олена" required>
-                        <span class="error-message">Будь ласка, введіть ваше ім'я</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Де вам зручно відповісти?</label>
-                        <select name="messenger" class="form-select">
-                            <option value="telegram">Telegram</option>
-                            <option value="instagram">Instagram</option>
-                            <option value="viber">Viber</option>
-                            <option value="whatsapp">WhatsApp</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Ваш номер телефону або нікнейм</label>
-                        <input type="text" name="contact" class="form-input" placeholder="@nickname або +380..." required>
-                        <span class="error-message">Залиште контакт, щоб я могла написати</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Яка у вас ціль?</label>
-                        <select name="goal" class="form-select">
-                            <option value="consultation">Хочу консультацію</option>
-                            <option value="lose_weight">Схуднення</option>
-                            <option value="gain_weight">Набір ваги</option>
-                            <option value="health">Робота з аналізами / здоров'ям</option>
-                            <option value="other">Інше питання</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="form-btn">Відправити заявку</button>
-                    
-                    <p style="font-size: 0.8em; margin-top: 15px; margin-bottom: 0;">*Ваші дані залишаються конфіденційними</p>
-                </form>
             </div>
         </div>
     </section>
@@ -154,7 +115,8 @@
                         <i class="fab fa-tiktok"></i>
                     </a>
                 </div>
-                <p class="footer-text" style="margin-bottom: 10px; font-size: 0.9em; color: #999;">Є питання? Пишіть:</p>
+                <p class="footer-text" style="margin-bottom: 10px; font-size: 0.9em; color: #999;">Є питання? Пишіть:
+                </p>
                 <div class="footer-socials">
                     <a href="https://t.me/yourtelegram" target="_blank" class="footer-social-btn">
                         <i class="fab fa-telegram-plane"></i>
@@ -167,7 +129,91 @@
             &copy; 2025 NutriHarmonia. Всі права захищені. Розроблено з турботою про здоров'я.
         </div>
     </footer>
-    
+
+    <div id="formModal" class="form-modal-overlay">
+        <div class="form-modal-container">
+            <span class="close-form-btn">&times;</span>
+
+            <div class="form-wrapper-modal">
+                <h2>Записатися на консультацію</h2>
+                <p>Заповніть форму, і я зв'яжусь з вами.</p>
+                <form id="contactForm" action="https://formspree.io/f/ТВОЇ_ЛІТЕРИ" method="POST" class="modern-form"
+                    novalidate>
+
+                    <div class="form-group">
+                        <label class="form-label">Ваше ім'я</label>
+                        <input type="text" name="name" class="form-input" placeholder="Наприклад: Олена" required>
+                        <div class="error-text-hint">Будь ласка, введіть ваше ім'я</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Де вам зручно відповісти?</label>
+                        <div class="custom-select-wrapper">
+                            <select name="messenger" id="messengerSelect" style="display: none;">
+                                <option value="telegram">Telegram</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="viber">Viber</option>
+                            </select>
+
+                            <div class="custom-select-trigger">
+                                <span id="messengerText"><i class="fab fa-telegram-plane"></i> Telegram</span>
+                                <i class="fas fa-chevron-down arrow"></i>
+                            </div>
+
+                            <div class="custom-options">
+                                <div class="custom-option selected" data-value="telegram">
+                                    <i class="fab fa-telegram-plane"></i> Telegram
+                                </div>
+                                <div class="custom-option" data-value="instagram">
+                                    <i class="fab fa-instagram"></i> Instagram
+                                </div>
+                                <div class="custom-option" data-value="viber">
+                                    <i class="fab fa-viber"></i> Viber
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ваш номер телефону або нікнейм</label>
+                        <input type="text" name="contact" class="form-input" placeholder="@nickname або +380..."
+                            required>
+                        <div class="error-text-hint">Залиште контакт для зв'язку</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Яка у вас ціль?</label>
+                        <div class="custom-select-wrapper">
+                            <select name="goal" id="goalSelect" style="display: none;">
+                                <option value="consultation">Хочу консультацію</option>
+                                <option value="lose_weight">Схуднення</option>
+                                <option value="health">Робота з аналізами</option>
+                                <option value="other">Інше питання</option>
+                            </select>
+
+                            <div class="custom-select-trigger">
+                                <span id="goalText">Хочу консультацію</span>
+                                <i class="fas fa-chevron-down arrow"></i>
+                            </div>
+
+                            <div class="custom-options">
+                                <div class="custom-option selected" data-value="consultation">Хочу консультацію</div>
+                                <div class="custom-option" data-value="lose_weight">Схуднення</div>
+                                <div class="custom-option" data-value="health">Робота з аналізами</div>
+                                <div class="custom-option" data-value="other">Інше питання</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-btn">Відправити заявку</button>
+                    <p style="font-size: 0.75em; color: #999; margin-top: 15px; text-align: center;">*Конфіденційно</p>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
