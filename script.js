@@ -1,35 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==================================================
-    // 1. МОБІЛЬНЕ МЕНЮ (БУРГЕР)
+    // 1. МОБІЛЬНЕ МЕНЮ (РОЗУМНЕ: Тінь + Блокування скролу)
     // ==================================================
     const mobileMenuBtn = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const body = document.body;
 
     if (mobileMenuBtn && navMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuBtn.classList.toggle('active');
-            navMenu.classList.toggle('active');
+        
+        // Функція перемикання (Відкрити/Закрити)
+        const toggleMenu = () => {
+            const isActive = navMenu.classList.contains('active');
             
-            // Блокуємо прокрутку фону, коли меню відкрите
-            if (navMenu.classList.contains('active')) {
-                body.style.overflow = 'hidden';
+            if (isActive) {
+                // Закриваємо
+                mobileMenuBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('no-scroll'); // Розблокуємо скрол
             } else {
-                body.style.overflow = '';
+                // Відкриваємо
+                mobileMenuBtn.classList.add('active');
+                navMenu.classList.add('active');
+                body.classList.add('no-scroll'); // Блокуємо скрол
+            }
+        };
+
+        // 1. Клік по кнопці "Бургер"
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Щоб клік не пішов далі на document
+            toggleMenu();
+        });
+
+        // 2. Закриття при кліку ПОЗА меню (на тінь)
+        document.addEventListener('click', (e) => {
+            // Якщо меню відкрите...
+            if (navMenu.classList.contains('active')) {
+                // ...і клік був НЕ по самому меню і НЕ по кнопці
+                if (!navMenu.contains(e.target) && e.target !== mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    body.classList.remove('no-scroll');
+                }
             }
         });
 
-        // Закриваємо меню при кліку на посилання
-        document.querySelectorAll('.nav-links li a').forEach(link => {
+        // 3. Закриваємо меню при кліку на посилання всередині
+        // (Тепер включає і звичайні посилання, і логотип, і кнопку "Зв'язатися")
+        const menuLinks = document.querySelectorAll('.nav-links a, .mobile-nav-logo, .mobile-btn');
+        
+        menuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuBtn.classList.remove('active');
                 navMenu.classList.remove('active');
-                body.style.overflow = '';
+                body.classList.remove('no-scroll');
             });
         });
     }
-
 
     // ==================================================
     // 2. FAQ (АКОРДЕОН)
