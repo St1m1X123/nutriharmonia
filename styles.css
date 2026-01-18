@@ -1938,7 +1938,7 @@ body {
     .header { height: 70px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
     .header-actions { display: none; } /* Ховаємо кнопку "Зв'язатися" в шапці */
 
-    /* --- 2. МЕНЮ-ШТОРКА (ФІНАЛ З ФІКСАМИ) --- */
+    /* --- 2. МЕНЮ-ШТОРКА (ФІНАЛ) --- */
     .mobile-menu-toggle {
         display: block;
         font-size: 1.8em;
@@ -1962,17 +1962,13 @@ body {
         right: -100%;
         width: 80%;
         max-width: 320px;
-        
-        /* 🔥 ВИПРАВЛЕННЯ ВИСОТИ: 100dvh враховує адресний рядок браузера */
-        height: 100dvh; 
-        
+        height: 100dvh; /* 🔥 100dvh для мобілок */
         background: white;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        padding: 40px 20px 20px 20px; /* Трохи менше знизу */
-        
+        padding: 40px 20px 20px 20px;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: -5px 0 15px rgba(0,0,0,0.1);
         z-index: 1001;
@@ -1981,14 +1977,7 @@ body {
 
     .nav-menu.active {
         right: 0;
-        /* Тінь залишається */
         box-shadow: 0 0 0 1000px rgba(0,0,0,0.5);
-    }
-
-    /* --- БЛОКУВАННЯ СКРОЛУ --- */
-    /* Цей клас додається через JS до body */
-    body.no-scroll {
-        overflow: hidden;
     }
 
     /* Елементи мобільного меню */
@@ -2002,11 +1991,9 @@ body {
     .mobile-nav-logo {
         text-decoration: none;
         margin-bottom: 20px;
-        /* 🔥 ЗАБОРОНА ЗМЕНШЕННЯ: Логотип завжди великий в меню */
         transform: none !important; 
     }
     
-    /* Примусово великий шрифт для лого в меню, навіть якщо шапка scrolled */
     .header.scrolled .mobile-nav-logo .logo-text,
     .mobile-nav-logo .logo-text {
         font-size: 2.2em !important; 
@@ -2014,7 +2001,6 @@ body {
         color: #7ab317;
     }
 
-    /* Посилання */
     .nav-links {
         flex-direction: column;
         gap: 25px;
@@ -2028,12 +2014,10 @@ body {
         font-weight: 600;
     }
 
-    /* Нижній блок */
     .mobile-nav-footer {
         width: 100%;
         gap: 20px;
         margin-top: 20px;
-        /* Відступ знизу, щоб на iPhone смужка не перекривала */
         padding-bottom: 20px; 
     }
 
@@ -2046,18 +2030,16 @@ body {
         color: #333;
     }
 
-    /* 🔥 ЗАБОРОНА ЗМЕНШЕННЯ КНОПКИ */
-    /* Використовуємо !important, щоб перебити стилі .header.scrolled */
     .header-btn.mobile-btn {
         display: block;
         width: 100%;
         text-align: center;
-        padding: 15px !important;       /* Завжди велика */
-        font-size: 1.1em !important;    /* Завжди великий текст */
+        padding: 15px !important;
+        font-size: 1.1em !important;
         margin-top: 0;
     }
 
-    /* --- 3. ІНШІ БЛОКИ (Без змін, залишив твій код) --- */
+    /* --- 3. ІНШІ БЛОКИ --- */
     .about-container, .teaser-container, .contact-wrapper, 
     .service-row, .service-row.reverse {
         flex-direction: column;
@@ -2134,18 +2116,32 @@ body {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         padding-top: 20px;
-        justify-content: flex-start; /* Важливо для мобілки */
+        justify-content: flex-start;
     }
 
-    /* --- 5. ГАЛЕРЕЯ --- */
     .gallery-grid, .insta-grid { grid-template-columns: repeat(2, 1fr); }
     
-    /* --- 6. СТРІЛКА ВНИЗ --- */
     .scroll-down-btn {
         right: 50%;
         transform: translateX(50%);
         bottom: 20px;
     }
+}
+
+/* 5. БЛОКУВАННЯ СКРОЛУ (БЕЗ !IMPORTANT, АЛЕ ЗАЛІЗНО) */
+
+/* 1. Коли у body є клас no-scroll, ми забороняємо скрол на html */
+/* Цей селектор сильніший за твій базовий html */
+html:has(body.no-scroll) {
+    overflow: hidden; 
+    height: 100dvh;
+}
+
+/* 2. Блокуємо сам body */
+body.no-scroll {
+    overflow: hidden;
+    height: 100dvh;
+    touch-action: none; /* Вимикає спроби свайпати на айфоні */
 }
 
 /* ==================================== */
