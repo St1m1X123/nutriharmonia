@@ -941,47 +941,102 @@ body {
 }
 
 /* ==================================== */
-/* 12. НОВІ СЕКЦІЇ ГОЛОВНОЇ СТОРІНКИ */
+/* 12. НОВІ СЕКЦІЇ (ЧИСТО, БЕЗ !IMPORTANT) */
 /* ==================================== */
 
-/* 1. БОЛІ (Pain Points) */
+/* --- ЗАГАЛЬНІ СТИЛІ (Для всіх екранів) --- */
 .pain-section {
     padding: 80px 20px;
     background-color: #fff;
     text-align: center;
 }
-
-.pain-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
 .pain-card {
     padding: 30px;
     border-radius: 15px;
     background: #fff;
     border: 1px solid #eee;
-    transition: transform 0.3s;
+    /* Всередині */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 🔥 БАЗА: Завжди видима, ніяких прихованих станів тут! */
+    opacity: 1;
+    transform: none;
+    /* Плавність тільки для кольорів і тіней */
+    transition: box-shadow 0.3s, border-color 0.3s;
 }
+.pain-icon { font-size: 3em; margin-bottom: 15px; }
+.pain-card h3 { font-size: 1.3em; margin-bottom: 10px; color: #333; }
 
-.pain-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    border-color: #7ab317;
+
+/* --- ПЕРЕВАГИ (About Us) --- */
+.about-us {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #fcfcfc;
 }
-
-.pain-icon {
-    font-size: 3em;
-    margin-bottom: 15px;
+.feature-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #7ab317;
+    /* Всередині */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 🔥 БАЗА: Видима */
+    opacity: 1;
+    transform: none;
+    transition: box-shadow 0.3s, transform 0.3s;
 }
+.icon-large { font-size: 2.5em; color: #7ab317; margin-bottom: 20px; }
+.feature-card h3 { color: #4a7d0e; margin-bottom: 10px; font-size: 1.7em; font-weight: 700; }
 
-.pain-card h3 {
-    font-size: 1.3em;
-    margin-bottom: 10px;
-    color: #333;
+
+/* ============================================== */
+/* 💻 СТИЛІ ТІЛЬКИ ДЛЯ КОМП'ЮТЕРА (від 901px) */
+/* ============================================== */
+@media (min-width: 901px) {
+    
+    /* 1. Вмикаємо сітку Grid */
+    .pain-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+        gap: 40px; 
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* 2. Ховаємо картки для JS-анімації (ТІЛЬКИ ТУТ) */
+    .pain-card, 
+    .feature-card {
+        opacity: 0; /* Приховали */
+        transform: translateY(30px); /* Опустили */
+        transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+    }
+
+    /* Коли JS дає клас .fade-in-up — показуємо */
+    .pain-card.fade-in-up,
+    .feature-card.fade-in-up {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* 3. Ховер ефекти (працюють тільки після появи) */
+    .pain-card.fade-in-up:hover,
+    .feature-card.fade-in-up:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #7ab317;
+    }
 }
 
 /* ==================================== */
@@ -2591,100 +2646,74 @@ button.messenger-btn:hover {
 }
 
 /* ==================================== */
-/* 22. МОБІЛЬНА АДАПТАЦІЯ: ГОРИЗОНТАЛЬНИЙ СКРОЛ (ФІНАЛ) */
+/* 22. МОБІЛЬНА АДАПТАЦІЯ: НА ВСЮ ШИРИНУ (CLEAN) */
 /* ==================================== */
 @media (max-width: 900px) {
 
-    /* --- 1. КОНТЕЙНЕР (ТРЕК) --- */
+    /* --- 1. КОНТЕЙНЕР НА ВСЮ ШИРИНУ --- */
     .pain-grid, 
     .features-grid {
-        display: flex;             /* В рядок */
-        flex-wrap: nowrap;         /* Забороняємо перенесення */
-        overflow-x: auto;          /* Дозволяємо скрол */
-        gap: 0;                    /* Відступи регулюємо марджинами карток */
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0;
         
-        /* Важливо: даємо простір зверху/знизу для тіней, щоб їх не обрізало */
+        /* 🔥 РОЗТЯГУЄМО ДО КРАЇВ ЕКРАНА */
+        /* Ігноруємо відступи контейнера (по 20px з боків) */
+        width: calc(100% + 40px); 
+        margin-left: -20px;       
+        margin-right: -20px;      
+        
+        /* Відступи всередині стрічки */
         padding-top: 40px;
-        padding-bottom: 50px;
+        padding-bottom: 40px;
         
-        /* 🔥 ЦЕНТРУВАННЯ: Робимо відступи з боків так, щоб центр картки (140px) */
-        /* збігався з центром екрана (50%) */
-        padding-left: calc(50% - 140px);
-        padding-right: calc(50% - 140px);
+        /* ЦЕНТРУВАННЯ: (50% екрану) - (половина картки 260/2 = 130px) */
+        padding-left: calc(50% - 130px);
+        padding-right: calc(50% - 130px);
         
-        /* Вмикаємо магніт */
+        /* Магніт */
         scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch; /* Плавність для iOS */
-        
-        /* Ховаємо скролбар */
+        -webkit-overflow-scrolling: touch;
         scrollbar-width: none; 
     }
-    /* Ховаємо скролбар для Chrome/Safari */
-    .pain-grid::-webkit-scrollbar, 
-    .features-grid::-webkit-scrollbar { display: none; }
+    .pain-grid::-webkit-scrollbar, .features-grid::-webkit-scrollbar { display: none; }
 
-
-    /* --- 2. КАРТКА (БАЗА) --- */
+    /* --- 2. КАРТКИ --- */
     .pain-card, 
     .feature-card {
-        /* Жорстка фіксація розмірів */
-        flex: 0 0 280px;
-        width: 280px;
-        margin: 0 10px; /* Відступ між сусідніми картками */
+        /* Вужчі (260px), щоб краще було видно сусідів */
+        flex: 0 0 260px;
+        width: 260px;
+        margin: 0 8px; /* Відступ між ними */
         
-        /* Точка прилипання магніту */
         scroll-snap-align: center;
         
-        /* --- СТАН 1: БЕЗПЕЧНИЙ СТАРТ --- */
-        /* За замовчуванням картка виглядає нормально! */
-        transform: scale(1);
+        /* Гарантуємо видимість */
         opacity: 1;
-        filter: none;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Легка тінь */
-        border-color: #eee;
+        transform: none;
         
-        /* Плавні переходи для майбутньої анімації */
-        transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+        /* Статичний стиль */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        background: #fff;
+        border-radius: 20px;
+        border: 1px solid #eee;
         
-        /* Внутрішнє наповнення */
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 30px 20px;
-        background: #fff;
-        border-radius: 20px;
-        border: 1px solid #eee;
     }
-
-    /* --- 3. БЛОКУВАННЯ ХОВЕРІВ (Щоб не стрибало від пальця) --- */
+    
+    /* Вимикаємо ховер, щоб не стрибало */
     .pain-card:hover, .feature-card:hover {
-        transform: scale(1) !important;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
-        border-color: #eee !important;
+        transform: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border-color: #eee;
     }
-
-    /* --- 4. АКТИВНА КАРТКА (Додає JS) --- */
-    .pain-card.active, 
-    .feature-card.active {
-        transform: scale(1.1) !important; /* Збільшуємо */
-        opacity: 1 !important;
-        z-index: 10;
-        border-color: #7ab317 !important; /* Зелена рамка */
-        box-shadow: 0 20px 40px rgba(122, 179, 23, 0.25) !important; /* Велика тінь */
-    }
-
-    /* --- 5. НЕАКТИВНІ КАРТКИ (ТІЛЬКИ КОЛИ JS ЗАВАНТАЖИВСЯ) --- */
-    /* .loaded додає скрипт. Тільки тоді ми робимо бокові картки тьмяними */
-    .pain-grid.loaded .pain-card:not(.active),
-    .features-grid.loaded .feature-card:not(.active) {
-        transform: scale(0.95) !important; /* Трохи менші */
-        opacity: 0.5 !important;           /* Напівпрозорі */
-    }
-
-    /* Корекція тексту */
-    .pain-icon, .icon-large { font-size: 2.5em; margin-bottom: 15px; }
-    .pain-card h3, .feature-card h3 { font-size: 1.3em; }
-    .pain-section, .about-us { padding: 20px 0; }
+    
+    /* Тексти */
+    .pain-icon, .icon-large { font-size: 2.2em; margin-bottom: 15px; }
+    .pain-card h3, .feature-card h3 { font-size: 1.2em; }
+    .pain-section, .about-us { padding: 30px 0; }
 }
-
