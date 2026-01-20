@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
 
     if (mobileMenuBtn && navMenu) {
-        
+
         // Функція перемикання
         const toggleMenu = () => {
             const isActive = navMenu.classList.contains('active');
@@ -93,12 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. АНІМАЦІЯ ПОЯВИ
     // ==================================================
     const observer = new IntersectionObserver((entries) => {
-       entries.forEach(entry => {
-           if (entry.isIntersecting) {
-               entry.target.classList.add('fade-in-up');
-               observer.unobserve(entry.target); 
-           }
-       });
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                observer.unobserve(entry.target);
+            }
+        });
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.feature-card, .pricing-card, .pain-card, .gallery-item, .service-row, .consult-promo, .flip-card').forEach(el => observer.observe(el));
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             let hasError = false;
 
             // Знаходимо всі обов'язкові поля
@@ -121,10 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!input.value.trim()) {
                     // --- ПОМИЛКА ---
                     hasError = true;
-                    
+
                     // 1. Червона рамка (залишається)
                     input.classList.add('input-error');
-                    
+
                     // 2. Анімація тряски (додаємо і видаляємо через 0.5с)
                     input.classList.add('shake-active');
                     setTimeout(() => {
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Прибираємо червоне, коли почали писати
-                input.addEventListener('input', function() {
+                input.addEventListener('input', function () {
                     this.classList.remove('input-error');
                     const currentErrorText = this.nextElementSibling;
                     if (currentErrorText) currentErrorText.style.display = 'none';
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
+
     // ==================================================
     // 6. ГАЛЕРЕЯ (ВИПРАВЛЕНО КОНФЛІКТ ІМЕН)
     // ==================================================
@@ -170,25 +170,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Функція відкриття ГАЛЕРЕЇ (перейменували)
     const openGallery = (imgLink) => {
         if (!imgLink) return;
-        
+
         fullImage.src = imgLink;
-        imageViewer.classList.add('active'); 
-        
+        imageViewer.classList.add('active');
+
         // Блокуємо скрол
         document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden'; 
+        document.documentElement.style.overflow = 'hidden';
     };
 
     // Функція закриття ГАЛЕРЕЇ (перейменували)
     const closeGallery = () => {
-        imageViewer.classList.remove('active'); 
-        
+        imageViewer.classList.remove('active');
+
         // Відновлюємо скрол
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
 
         setTimeout(() => {
-            if(fullImage) fullImage.src = ''; 
+            if (fullImage) fullImage.src = '';
         }, 400);
     };
 
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==================================================
     const modalOverlay = document.querySelector('.form-modal-overlay');
     const closeFormBtn = document.querySelector('.close-form-btn');
-    const openModalBtns = document.querySelectorAll('.open-modal-btn'); 
+    const openModalBtns = document.querySelectorAll('.open-modal-btn');
 
     // Функція відкриття ФОРМИ (перейменували)
     const openForm = (e) => {
@@ -292,18 +292,18 @@ document.addEventListener('DOMContentLoaded', () => {
         options.forEach(option => {
             option.addEventListener('click', (e) => {
                 e.stopPropagation();
-                
+
                 // Прибираємо клас selected у всіх і додаємо натиснутому
                 options.forEach(opt => opt.classList.remove('selected'));
                 option.classList.add('selected');
-                
+
                 // Оновлюємо текст на кнопці (з іконкою, якщо є)
                 triggerText.innerHTML = option.innerHTML;
-                
+
                 // Оновлюємо значення СПРАВЖНЬОГО прихованого селекту
                 const value = option.getAttribute('data-value');
                 hiddenSelect.value = value;
-                
+
                 // Закриваємо список
                 wrapper.classList.remove('open');
             });
@@ -318,5 +318,61 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    
+
+    /* ================================================== */
+    /* 3D КАРУСЕЛЬ (ЛОГІКА ДЛЯ PAIN-GRID) */
+    /* ================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Знаходимо нашу секцію з болями
+        const slider = document.querySelector('.pain-grid');
+
+        if (slider) {
+            const activateSlider = () => {
+                // 1. Кажемо CSS, що JS увімкнувся (вмикаємо ефект розмиття)
+                slider.classList.add('loaded');
+
+                const cards = slider.querySelectorAll('.pain-card');
+
+                // Знаходимо центр екрана (або контейнера)
+                const sliderCenter = slider.getBoundingClientRect().left + slider.offsetWidth / 2;
+
+                let closestCard = null;
+                let minDistance = Infinity;
+
+                // 2. Шукаємо картку, яка найближче до центру
+                cards.forEach(card => {
+                    const cardCenter = card.getBoundingClientRect().left + card.offsetWidth / 2;
+                    const distance = Math.abs(sliderCenter - cardCenter);
+
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestCard = card;
+                    }
+                });
+
+                // 3. Роздаємо класи
+                cards.forEach(card => {
+                    if (card === closestCard) {
+                        card.classList.add('active'); // Ти по центру -> рости!
+                    } else {
+                        card.classList.remove('active'); // Ти збоку -> зменшуйся!
+                    }
+                });
+            };
+
+            // Слухаємо події скролу
+            slider.addEventListener('scroll', activateSlider);
+            slider.addEventListener('touchmove', activateSlider); // Для пальця
+
+            // Запускаємо відразу при завантаженні
+            activateSlider();
+
+            // І ще раз через мить (для надійності)
+            setTimeout(activateSlider, 100);
+
+            // При повороті екрану
+            window.addEventListener('resize', activateSlider);
+        }
+    });
 });
