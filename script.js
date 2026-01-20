@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==================================================
-    // 1. МОБІЛЬНЕ МЕНЮ (РОЗУМНЕ: Тінь + Блокування скролу)
+    // 1. МОБІЛЬНЕ МЕНЮ (Floating Card Logic)
     // ==================================================
     const mobileMenuBtn = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -9,51 +9,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (mobileMenuBtn && navMenu) {
         
-        // Функція перемикання (Відкрити/Закрити)
+        // Функція перемикання
         const toggleMenu = () => {
             const isActive = navMenu.classList.contains('active');
-            
             if (isActive) {
                 // Закриваємо
                 mobileMenuBtn.classList.remove('active');
                 navMenu.classList.remove('active');
-                body.classList.remove('no-scroll'); // Розблокуємо скрол
+                body.classList.remove('no-scroll');
             } else {
                 // Відкриваємо
                 mobileMenuBtn.classList.add('active');
                 navMenu.classList.add('active');
-                body.classList.add('no-scroll'); // Блокуємо скрол
+                body.classList.add('no-scroll');
             }
         };
 
-        // 1. Клік по кнопці "Бургер"
+        // Клік по бургеру
         mobileMenuBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Щоб клік не пішов далі на document
+            e.stopPropagation();
             toggleMenu();
         });
 
-        // 2. Закриття при кліку ПОЗА меню (на тінь)
+        // Закриття при кліку ПОЗА меню (на затемнений фон або просто повз)
         document.addEventListener('click', (e) => {
-            // Якщо меню відкрите...
             if (navMenu.classList.contains('active')) {
-                // ...і клік був НЕ по самому меню і НЕ по кнопці
+                // Якщо клікнули не по меню і не по кнопці
                 if (!navMenu.contains(e.target) && e.target !== mobileMenuBtn) {
-                    mobileMenuBtn.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    body.classList.remove('no-scroll');
+                    toggleMenu(); // Закриваємо
                 }
             }
         });
 
-        // 3. Закриваємо меню при кліку на посилання всередині
-        // (Тепер включає і звичайні посилання, і логотип, і кнопку "Зв'язатися")
+        // Закриття при кліку на будь-яке посилання всередині
         const menuLinks = document.querySelectorAll('.nav-links a, .mobile-nav-logo, .mobile-btn');
-        
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenuBtn.classList.remove('active');
-                navMenu.classList.remove('active');
-                body.classList.remove('no-scroll');
+                toggleMenu(); // Закриваємо
             });
         });
     }
