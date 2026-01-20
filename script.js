@@ -89,19 +89,30 @@ document.addEventListener('DOMContentLoaded', () => {
         checkScroll();
     }
 
-    // ==================================================
-    // 4. АНІМАЦІЯ ПОЯВИ
-    // ==================================================
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
+// ==================================================
+// 4. АНІМАЦІЯ ПОЯВИ (РОЗУМНА)
+// ==================================================
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-up');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
 
-    document.querySelectorAll('.feature-card, .pricing-card, .pain-card, .gallery-item, .service-row, .consult-promo, .flip-card').forEach(el => observer.observe(el));
+// ГРУПА 1: Анімуємо ВСЮДИ (і на телефоні, і на ПК)
+// (Сюди пишемо все, крім карток болей і переваг)
+const alwaysAnimate = document.querySelectorAll('.pricing-card, .gallery-item, .service-row, .consult-promo, .flip-card');
+alwaysAnimate.forEach(el => observer.observe(el));
+
+// ГРУПА 2: Анімуємо ТІЛЬКИ НА ПК (Ширина екрану більше 900px)
+if (window.innerWidth > 900) {
+    // Сюди додаємо наші проблемні картки. 
+    // На телефоні цей код просто проігнорується.
+    const desktopOnly = document.querySelectorAll('.pain-card, .feature-card');
+    desktopOnly.forEach(el => observer.observe(el));
+}
 
     // ==================================================
     // 5. ВАЛІДАЦІЯ ФОРМИ (З ВІБРАЦІЄЮ)
@@ -320,59 +331,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ================================================== */
-    /* 3D КАРУСЕЛЬ (ЛОГІКА ДЛЯ PAIN-GRID) */
-    /* ================================================== */
-    document.addEventListener('DOMContentLoaded', () => {
+/* 9. МОБИЛЬНАЯ КАРУСЕЛЬ (ЦЕНТРАЛЬНЫЙ АКТИВ) */
+/* ================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Находим оба наших слайдера
+    const carousels = document.querySelectorAll('.pain-grid, .features-grid');
 
-        // Знаходимо нашу секцію з болями
-        const slider = document.querySelector('.pain-grid');
+    const updateActiveCard = (slider) => {
+        // 1. Сообщаем CSS, что JS включился (включаем затемнение боковых)
+        slider.classList.add('loaded');
 
-        if (slider) {
-            const activateSlider = () => {
-                // 1. Кажемо CSS, що JS увімкнувся (вмикаємо ефект розмиття)
-                slider.classList.add('loaded');
+        // Находим центр контейнера
+        const sliderCenter = slider.getBoundingClientRect().left + slider.offsetWidth / 2;
+        
+        const cards = slider.querySelectorAll('.pain-card, .feature-card');
+        
+        // Перебираем все карточки
+        cards.forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            
+            // Считаем расстояние от центра экрана до центра карточки
+            const distance = Math.abs(sliderCenter - cardCenter);
 
-                const cards = slider.querySelectorAll('.pain-card');
+            // Если карточка ближе чем 100px к центру — она АКТИВНА
+            if (distance < 100) {
+                card.classList.add('active');
+            } else {
+                card.classList.remove('active');
+            }
+        });
+    };
 
-                // Знаходимо центр екрана (або контейнера)
-                const sliderCenter = slider.getBoundingClientRect().left + slider.offsetWidth / 2;
-
-                let closestCard = null;
-                let minDistance = Infinity;
-
-                // 2. Шукаємо картку, яка найближче до центру
-                cards.forEach(card => {
-                    const cardCenter = card.getBoundingClientRect().left + card.offsetWidth / 2;
-                    const distance = Math.abs(sliderCenter - cardCenter);
-
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        closestCard = card;
-                    }
-                });
-
-                // 3. Роздаємо класи
-                cards.forEach(card => {
-                    if (card === closestCard) {
-                        card.classList.add('active'); // Ти по центру -> рости!
-                    } else {
-                        card.classList.remove('active'); // Ти збоку -> зменшуйся!
-                    }
-                });
-            };
-
-            // Слухаємо події скролу
-            slider.addEventListener('scroll', activateSlider);
-            slider.addEventListener('touchmove', activateSlider); // Для пальця
-
-            // Запускаємо відразу при завантаженні
-            activateSlider();
-
-            // І ще раз через мить (для надійності)
-            setTimeout(activateSlider, 100);
-
-            // При повороті екрану
-            window.addEventListener('resize', activateSlider);
-        }
+    carousels.forEach(slider => {
+        // Слушаем скролл и движение пальцем
+        slider.addEventListener('scroll', () => updateActiveCard(slider));
+        slider.addEventListener('touchmove', () => updateActiveCard(slider));
+        
+        // Запускаем сразу при загрузке
+        updateActiveCard(slider);
+        
+        // И контрольный выстрел через полсекунды (если картинки грузятся)
+        setTimeout(() => updateActiveCard(slider), 500);
     });
+
+    // Обновляем при повороте телефона
+    window.addEventListener('resize', () => {
+        carousels.forEach(slider => updateActiveCard(slider));
+    });
+});
+
 });
