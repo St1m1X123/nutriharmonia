@@ -1929,14 +1929,14 @@ body {
 /* ==================================== */
 @media (max-width: 900px) {
     
-    /* 1. ФІКС МАСШТАБУ (Щоб не було зуму) */
+    /* 1. ФІКС МАСШТАБУ */
     html, body {
-        overflow-x: hidden; /* Забороняємо горизонтальний скрол */
+        overflow-x: hidden;
         width: 100%;
         position: relative;
     }
 
-    /* Зменшуємо шрифти заголовків */
+    /* Шрифти */
     .section-title { font-size: 1.8rem; margin-bottom: 25px; }
     .hero-content h1 { font-size: 2rem; }
     .hero-content p { font-size: 1rem; }
@@ -1953,96 +1953,85 @@ body {
 }
 
 
-    /* --- 2. БУРГЕР (КРАСИВИЙ ХРЕСТИК) --- */
+    /* --- 2. БУРГЕР (ИДЕАЛЬНЫЙ ЦЕНТР) --- */
     .mobile-menu-toggle {
         display: block;
         font-size: 1.8rem;
         cursor: pointer;
         color: #333;
         z-index: 2000;
-        transition: all 0.3s ease; /* Плавність для самого блоку */
+        transition: opacity 0.3s ease;
+        
+        /* Чтобы он изначально был ровно в шапке */
+        line-height: 1; 
     }
     
-    /* Коли меню відкрите */
+    /* Активное состояние (Крестик) */
     .mobile-menu-toggle.active {
         color: #7ab317;
-        /* transform: rotate(90deg); <--- ПРИБРАЛИ ЦЕЙ ПОВОРОТ */
-        
         position: fixed;
         right: 20px;
-        top: 20px; /* Зафіксували в кутку */
+        
+        /* 🔥 МАТЕМАТИЧЕСКИЙ ЦЕНТР */
+        top: 30px; /* Ровно половина высоты шапки (60px / 2) */
+        transform: translateY(-50%); /* Сдвигаем иконку ровно на её середину */
     }
 
-    /* 🔥 МАГІЯ: Міняємо іконку на хрестик */
+    /* Подмена иконки на крестик */
     .mobile-menu-toggle.active i::before {
-        content: "\f00d"; /* Це код іконки "X" (fa-times) у FontAwesome */
+        content: "\f00d"; 
     }
     
-    /* Додамо легкий поворот тільки самій іконці для краси */
+    /* Вращение только самой иконки (не ломает центровку блока) */
     .mobile-menu-toggle.active i {
-        transform: rotate(90deg); /* Хрестик плавно прокручується */
+        display: block; /* Важно для трансформации */
+        transform: rotate(90deg);
         transition: transform 0.3s ease;
     }
 
     /* --- 3. ПЛАВАЮЧА КАРТКА МЕНЮ --- */
     .nav-menu {
         position: fixed;
-        top: 70px; /* Відступ від верху */
-        right: -150%; /* Ховаємо далеко */
+        top: 70px;
+        right: -150%;
         
-        width: 280px; /* 🔥 Фіксована ширина (не розтягує екран) */
-        height: auto; /* 🔥 Висота під контент */
-        max-height: calc(100vh - 90px); /* Щоб не вилізло за низ */
+        width: 280px;
+        height: auto;
+        max-height: calc(100vh - 90px);
         
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(15px);
-        border-radius: 20px; /* Робимо "мило" */
+        border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center; /* Центруємо контент */
         padding: 30px 20px;
         
-        transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Пружинка */
+        transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         z-index: 1001;
         overflow-y: auto;
     }
 
     .nav-menu.active {
-        right: 20px; /* Випливає праворуч з відступом */
+        right: 20px;
     }
 
-    /* ЕЛЕМЕНТИ ВСЕРЕДИНІ (Вмикаємо їх) */
-    .mobile-nav-logo, 
-    .mobile-nav-footer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Логотип в меню */
-    .mobile-nav-logo {
-        text-decoration: none;
-        margin-bottom: 20px;
-        transform: none !important; 
-    }
-    .mobile-nav-logo .logo-text {
-        font-family: 'Dancing Script', cursive;
-        font-size: 1.8rem; /* Акуратний розмір */
-        color: #7ab317;
-    }
+    /* ЕЛЕМЕНТИ ВСЕРЕДИНІ */
+    .mobile-nav-footer { display: flex; flex-direction: column; align-items: center; }
 
     /* Посилання */
     .nav-links {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
         text-align: center;
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
     .nav-links li a {
-        font-size: 1.1rem; /* Не гігантський текст */
+        font-size: 1.2rem; /* Трохи збільшив для зручності */
         color: #333;
         font-weight: 700;
     }
@@ -2085,8 +2074,6 @@ body {
     .about-image-wrapper img, .contact-image img, .service-img img {
         width: 100%; max-width: 400px; margin: 0 auto;
     }
-
-    /* Тарифи (Скрол) */
     .pricing-grid {
         display: flex; flex-direction: row; overflow-x: auto; gap: 15px;
         padding: 10px 20px 30px; scroll-snap-type: x mandatory;
@@ -2094,14 +2081,22 @@ body {
     .flip-card { flex: 0 0 85%; scroll-snap-align: center; perspective: none; }
     .flip-card-inner { transform: none !important; display: flex; flex-direction: column; }
     .flip-card-back { position: relative; transform: none !important; justify-content: flex-start; padding-top: 20px; }
-
-    /* Галерея */
     .gallery-grid, .insta-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* БЛОКУВАННЯ СКРОЛУ (В самому низу CSS) */
-html:has(body.no-scroll) { overflow: hidden; height: 100vh; }
-body.no-scroll { overflow: hidden; height: 100vh; touch-action: none; }
+/* ======================================================= */
+/* 🔥 БЛОКУВАННЯ СКРОЛУ (ВИПРАВЛЕНО - БЕЗ СТРИБКІВ) */
+/* ======================================================= */
+
+/* Ми прибрали height: 100vh, тому сайт не буде обрізатися і стрибати вгору */
+html:has(body.no-scroll) {
+    overflow: hidden !important; 
+}
+
+body.no-scroll {
+    overflow: hidden !important;
+    touch-action: none; 
+}
 
 /* ==================================== */
 /* 22. СЕРТИФІКАТИ (СПИСОК) */
