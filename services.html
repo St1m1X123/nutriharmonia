@@ -20,7 +20,7 @@
                 <img src="nutriharmonia-logo.png" alt="Логотип">
                 <span class="logo-text">NutriHarmonia</span>
             </a>
-            
+
             <nav class="nav-menu">
                 <a href="index.html" class="mobile-nav-logo">
                     <span class="logo-text">NutriHarmonia</span>
@@ -106,232 +106,114 @@
         </div>
     </section>
 
+    <section class="pricing-modern">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Оберіть свій формат</h2>
+
+            <div class="pricing-carousel">
+
+                <div class="tech-card theme-start">
+                    <div class="tech-header">
+                        <div class="icon-box"><i class="fas fa-feather-alt"></i></div>
+                        <h3>Старт</h3>
+                        <p>Легкий вхід у систему</p>
+                    </div>
+
+                    <div class="tech-price">
+                        <span class="currency">₴</span>
+                        <span class="amount" id="price-start">900</span>
+                    </div>
+
+                    <div class="toggle-container">
+                        <div class="toggle-label">Термін:</div>
+                        <div class="toggle-group">
+                            <div class="toggle-btn active" onclick="switchPrice(this, 'price-start', '900')">1 тиж</div>
+                            <div class="toggle-btn" onclick="switchPrice(this, 'price-start', '1500')">2 тиж</div>
+                            <div class="toggle-btn" onclick="switchPrice(this, 'price-start', '2400')">4 тиж</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-body">
+                        <ul class="tech-list">
+                            <li><i class="fas fa-check"></i> Персональне меню</li>
+                            <li><i class="fas fa-check"></i> Список продуктів</li>
+                            <li><i class="fas fa-check"></i> Аналіз звичок</li>
+                        </ul>
+                        <a href="#modal" class="tech-btn open-modal-btn" data-plan="Start">Обрати Старт</a>
+                    </div>
+                </div>
+
+                <div class="tech-card theme-balance featured">
+                    <div class="floating-badge">ХІТ 🔥</div>
+
+                    <div class="tech-header">
+                        <div class="icon-box"><i class="fas fa-apple-alt"></i></div>
+                        <h3>Баланс</h3>
+                        <p>Здоров'я та контроль</p>
+                    </div>
+
+                    <div class="tech-price">
+                        <span class="currency">₴</span>
+                        <span class="amount" id="price-balance">1600</span>
+                    </div>
+
+                    <div class="toggle-container">
+                        <div class="toggle-label">Термін:</div>
+                        <div class="toggle-group">
+                            <div class="toggle-btn active" onclick="switchPrice(this, 'price-balance', '1600')">1 тиж
+                            </div>
+                            <div class="toggle-btn" onclick="switchPrice(this, 'price-balance', '2200')">2 тиж</div>
+                            <div class="toggle-btn" onclick="switchPrice(this, 'price-balance', '3800')">4 тиж</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-body">
+                        <ul class="tech-list">
+                            <li><i class="fas fa-check"></i> <strong>Все, що в "Старт"</strong></li>
+                            <li><i class="fas fa-check"></i> Корекція за аналізами</li>
+                            <li><i class="fas fa-check"></i> Чат-підтримка</li>
+                        </ul>
+                        <a href="#modal" class="tech-btn open-modal-btn" data-plan="Balance">Обрати Баланс</a>
+                    </div>
+                </div>
+
+                <div class="tech-card theme-vip">
+                    <div class="tech-header">
+                        <div class="icon-box"><i class="fas fa-crown"></i></div>
+                        <h3>VIP</h3>
+                        <p>Повний супровід 24/7</p>
+                    </div>
+
+                    <div class="tech-price">
+                        <span class="currency">₴</span>
+                        <span class="amount" id="price-vip">2500</span>
+                    </div>
+
+                    <div class="toggle-container">
+                        <div class="toggle-label">Термін:</div>
+                        <div class="toggle-group">
+                            <div class="toggle-btn active" onclick="switchPrice(this, 'price-vip', '2500')">1 тиж</div>
+                            <div class="toggle-btn" onclick="switchPrice(this, 'price-vip', '4500')">2 тиж</div>
+                            <div class="toggle-btn" onclick="switchPrice(this, 'price-vip', '6000')">4 тиж</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-body">
+                        <ul class="tech-list">
+                            <li><i class="fas fa-check"></i> <strong>Все, що в "Баланс"</strong></li>
+                            <li><i class="fas fa-star"></i> Ментор 24/7</li>
+                            <li><i class="fas fa-star"></i> Контроль тарілок</li>
+                        </ul>
+                        <a href="#modal" class="tech-btn open-modal-btn" data-plan="VIP">Стати VIP</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <section class="services-details">
         <div class="container">
-
-            <div class="service-row">
-                <div class="service-text">
-                    <div class="service-icon"><i class="fas fa-apple-alt"></i></div>
-                    <h3>Конструктор Меню (База)</h3>
-                    <p>Ідеально для тих, хто має самодисципліну, але не знає, <strong>що</strong> готувати. Ви отримуєте
-                        чіткий план: смачні рецепти, прості продукти з супермаркету та розрахований КБЖУ.</p>
-                    <ul class="service-list">
-                        <li><i class="fas fa-check"></i> Меню на 1-4 тижні</li>
-                        <li><i class="fas fa-check"></i> Книга рецептів</li>
-                        <li><i class="fas fa-check"></i> Список закупів</li>
-                    </ul>
-                </div>
-                <div class="service-img">
-                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Здорова їжа">
-                </div>
-            </div>
-
-            <div class="service-row reverse">
-                <div class="service-text">
-                    <div class="service-icon"><i class="fas fa-file-medical-alt"></i></div>
-
-                    <h3>Консультація + Стратегія</h3>
-
-                    <p>Якщо хочете покращити самопочуття (шкіра, енергія, травлення). Ми аналізуємо ваші звички та
-                        будуємо <strong>персональну систему</strong> харчування для відновлення ресурсів.</p>
-
-                    <ul class="service-list">
-                        <li><i class="fas fa-check"></i> Огляд лабораторних показників (Check-up)</li>
-                        <li><i class="fas fa-check"></i> Рекомендації щодо нутрицевтиків (вітаміни)</li>
-                        <li><i class="fas fa-check"></i> Спеціалізований раціон (FODMAP, БГ тощо)</li>
-                    </ul>
-                </div>
-                <div class="service-img">
-                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Аналіз та планування">
-                </div>
-            </div>
-            <div class="service-row">
-                <div class="service-text">
-                    <div class="service-icon"><i class="fas fa-crown"></i></div>
-                    <h3>VIP Менторство</h3>
-                    <p>Я буквально "живу" у вашому телефоні. Щоденні звіти по тарілках, психологічна підтримка, робота
-                        зі звичками. Я не дам вам зірватися на півдорозі.</p>
-                    <ul class="service-list">
-                        <li><i class="fas fa-check"></i> Чат 24/7 зі мною</li>
-                        <li><i class="fas fa-check"></i> Контроль кожної тарілки</li>
-                        <li><i class="fas fa-check"></i> Психологічна підтримка</li>
-                    </ul>
-                </div>
-                <div class="service-img">
-                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Тренування та підтримка">
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="comparison-section">
-        <div class="container">
-            <h2 class="section-title">Що входить у кожен пакет?</h2>
-
-            <div class="table-responsive">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 40%; text-align: left;">Послуга</th>
-                            <th style="width: 20%;">Старт</th>
-                            <th style="width: 20%;">Баланс</th>
-                            <th style="width: 20%;">VIP Супровід</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="feature-name">Персональне меню</td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Список продуктів</td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Аналіз способу життя</td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                        </tr>
-
-                        <tr>
-                            <td class="feature-name"><strong>Корекція за аналізами</strong></td>
-                            <td>—</td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Спеціалізовані раціони<br><small
-                                    style="font-weight: normal; font-size: 0.8em; color: #666;">(Стіл №5, без глютену
-                                    тощо)</small></td>
-                            <td>—</td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                        </tr>
-
-                        <tr>
-                            <td class="feature-name">Чат-підтримка</td>
-                            <td>—</td>
-                            <td style="font-weight: 700; color: #333;">2 тижні</td>
-                            <td style="font-weight: 700; color: #7ab317;">1 місяць</td>
-                        </tr>
-
-                        <tr>
-                            <td class="feature-name">Підбір вітамінів (БАДів)</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="feature-name">Щоденний контроль тарілок</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td><i class="fas fa-check-circle check-yes"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <section class="pricing-section" id="prices">
-        <div class="container">
-            <h2 class="section-title">Оберіть свій формат</h2>
-
-            <div class="pricing-grid">
-
-                <div class="flip-card start">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <i class="fas fa-feather-alt flip-icon"></i>
-                            <h3 class="flip-title">Старт</h3>
-                            <p class="flip-desc">Ідеальний початок. Персональне меню та аналіз звичок.</p>
-
-                            <div class="flip-price">1000 ₴</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #f39c12; margin-top: 5px;">1 тиждень
-                            </div>
-
-                            <p style="font-size: 0.8em; color: #999; margin-top: 10px;">(Наведіть для деталей)</p>
-                        </div>
-
-                        <div class="flip-card-back">
-                            <h3 style="margin-bottom: 20px;">Легкий старт</h3>
-                            <ul class="flip-list">
-                                <li><i class="fas fa-check"></i> Персональне меню</li>
-                                <li><i class="fas fa-check"></i> Список продуктів</li>
-                                <li><i class="fas fa-check"></i> Аналіз способу життя</li>
-                            </ul>
-                            <a href="#" class="flip-btn open-modal-btn">Обрати Старт</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card popular">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="popular-badge">ХІТ 🔥</span>
-                            <i class="fas fa-apple-alt flip-icon"></i>
-                            <h3 class="flip-title">Баланс</h3>
-                            <p class="flip-desc">Комплексний підхід: аналізи, корекція та підтримка.</p>
-
-                            <div class="flip-price">1500 ₴</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #7ab317; margin-top: 5px;">2 тижні
-                            </div>
-
-                            <p style="font-size: 0.8em; color: #999; margin-top: 10px;">(Наведіть для деталей)</p>
-                        </div>
-
-                        <div class="flip-card-back">
-                            <h3 style="margin-bottom: 20px;">Вибір більшості</h3>
-                            <ul class="flip-list">
-                                <li><i class="fas fa-check"></i> Персональне меню</li>
-                                <li><i class="fas fa-check"></i> Список продуктів + Аналіз</li>
-                                <li><i class="fas fa-check"></i> <strong>Корекція за аналізами</strong></li>
-                                <li><i class="fas fa-check"></i> <strong>Спеціалізовані раціони</strong></li>
-                                <li><i class="fas fa-check"></i> <strong>Чат-підтримка (2 тижні)</strong></li>
-                            </ul>
-                            <a href="#" class="flip-btn open-modal-btn">Обрати Баланс</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card vip">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <i class="fas fa-crown flip-icon"></i>
-                            <h3 class="flip-title">VIP</h3>
-                            <p class="flip-desc">Повний супровід за руку до вашого результату.</p>
-
-                            <div class="flip-price">2500 ₴</div>
-                            <div style="font-size: 1.1em; font-weight: 700; color: #9c27b0; margin-top: 5px;">1 місяць
-                            </div>
-
-                            <p style="font-size: 0.8em; color: #999; margin-top: 10px;">(Наведіть для деталей)</p>
-                        </div>
-
-                        <div class="flip-card-back">
-                            <h3 style="margin-bottom: 20px;">VIP Контроль</h3>
-                            <ul class="flip-list">
-                                <li><i class="fas fa-check"></i> Все, що в "Балансі"</li>
-                                <li><i class="fas fa-star"></i> <strong>Підбір вітамінів (БАДів)</strong></li>
-                                <li><i class="fas fa-star"></i> <strong>Щоденний контроль тарілок</strong></li>
-                                <li><i class="fas fa-star"></i> <strong>Чат-підтримка (1 місяць)</strong></li>
-                            </ul>
-                            <a href="#" class="flip-btn open-modal-btn">Стати VIP</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
             <div class="consult-promo">
                 <div class="consult-text">
                     <h3>Потрібна лише консультація?</h3>

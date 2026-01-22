@@ -333,206 +333,6 @@ body {
 }
 
 /* ==================================== */
-/* 6. СЕКЦІЯ ТАРИФІВ (REAL 3D FLIP) - ФІНАЛ */
-/* ==================================== */
-.pricing-section {
-    padding: 100px 20px;
-    background-color: #f9fcf9;
-    perspective: 1000px;
-    text-align: center;
-}
-
-.pricing-grid {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* --- КОНТЕЙНЕР КАРТКИ --- */
-.flip-card {
-    background-color: transparent;
-    width: 340px;
-    height: 540px;
-    perspective: 1000px;
-    cursor: pointer;
-    margin-bottom: 30px;
-}
-
-/* ВНУТРІШНЯ ЧАСТИНА (Обертання) */
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transform-style: preserve-3d;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-}
-
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-/* --- СТОРОНИ (Спільні стилі) --- */
-.flip-card-front,
-.flip-card-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-}
-
-/* ПЕРЕДНЯ СТОРОНА */
-.flip-card-front {
-    background-color: #ffffff;
-    color: #333;
-    border: 2px solid #f0f0f0;
-    z-index: 2;
-    justify-content: center;
-    /* Центруємо вміст */
-}
-
-/* ЗАДНЯ СТОРОНА */
-.flip-card-back {
-    background: linear-gradient(135deg, #7ab317 0%, #558b2f 100%);
-    color: white;
-    transform: rotateY(180deg);
-    z-index: 1;
-    /* Тут ми прибрали justify-content, бо margins зроблять всю роботу */
-}
-
-/* 🔥 МАГІЯ ЦЕНТРУВАННЯ ТУТ 🔥 */
-.flip-card-back h3 {
-    margin-top: auto;
-    /* Штовхає текст вниз від стелі */
-}
-
-/* --- ЕЛЕМЕНТИ --- */
-.flip-icon {
-    font-size: 4em;
-    color: #7ab317;
-    margin-bottom: 25px;
-}
-
-.flip-title {
-    font-size: 2em;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.flip-desc {
-    color: #666;
-    margin-bottom: 20px;
-    font-size: 1em;
-    line-height: 1.5;
-}
-
-.flip-price {
-    font-size: 2.2em;
-    color: #7ab317;
-    font-weight: 800;
-    margin-top: auto;
-}
-
-/* СПИСОК */
-.flip-list {
-    list-style: none;
-    text-align: left;
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-.flip-list li {
-    padding: 8px 0;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
-    font-size: 0.95em;
-    display: flex;
-    align-items: center;
-}
-
-.flip-list li i {
-    margin-right: 10px;
-    color: #c8e6c9;
-}
-
-/* КНОПКА */
-.flip-btn {
-    background-color: white;
-    color: #7ab317;
-    padding: 15px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 800;
-    transition: transform 0.3s;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: inline-block;
-
-    /* 🔥 КНОПКА ЗАВЖДИ ВНИЗУ */
-    margin-top: auto;
-    margin-bottom: 0;
-}
-
-.flip-btn:hover {
-    transform: scale(1.05);
-    background-color: #f1f1f1;
-}
-
-.popular-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: #ffc107;
-    color: #333;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.8em;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* КОЛЬОРОВІ СХЕМИ */
-/* 🟠 СТАРТ (Помаранчевий) */
-.flip-card.start .flip-icon,
-.flip-card.start .flip-price {
-    color: #f39c12;
-}
-
-.flip-card.start .flip-card-back {
-    background: linear-gradient(135deg, #f1c40f 0%, #d35400 100%);
-}
-
-.flip-card.start .flip-btn {
-    color: #d35400;
-}
-
-/* 🟣 VIP (Фіолетовий) */
-.flip-card.vip .flip-icon,
-.flip-card.vip .flip-price {
-    color: #9c27b0;
-}
-
-.flip-card.vip .flip-card-back {
-    background: linear-gradient(135deg, #ab47bc 0%, #7b1fa2 100%);
-}
-
-.flip-card.vip .flip-btn {
-    color: #7b1fa2;
-}
-
-/* ==================================== */
 /* 7. ВЕЛИКИЙ ФУТЕР (PREMIUM FOOTER) */
 /* ==================================== */
 .footer {
@@ -1615,82 +1415,6 @@ body {
         /* Список лишаємо зліва */
         display: inline-block;
     }
-}
-
-/* ==================================== */
-/* 15. СТИЛІ ДЛЯ СТОРІНКИ ПОСЛУГ (ДОДАТОК) */
-/* ==================================== */
-
-/* ПОРІВНЯЛЬНА ТАБЛИЦЯ */
-.comparison-section {
-    padding: 80px 20px;
-    background-color: #fff;
-    text-align: center;
-}
-
-.table-responsive {
-    overflow-x: auto;
-    /* Щоб на телефоні можна було гортати таблицю */
-}
-
-.comparison-table {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
-
-.comparison-table th {
-    background-color: #7ab317;
-    color: white;
-    padding: 20px;
-    font-size: 1.1em;
-    text-transform: uppercase;
-}
-
-.comparison-table td {
-    padding: 15px 20px;
-    border-bottom: 1px solid #eee;
-    color: #555;
-}
-
-.comparison-table tr:last-child td {
-    border-bottom: none;
-}
-
-.comparison-table tr:hover {
-    background-color: #f9fcf9;
-    /* Підсвітка рядка при наведенні */
-}
-
-.feature-name {
-    text-align: left;
-    font-weight: 600;
-    color: #333 !important;
-    width: 40%;
-    /* Перша колонка ширша */
-}
-
-.check-yes {
-    color: #7ab317;
-    font-size: 1.3em;
-}
-
-/* Дрібні правки для карток цін, щоб вони влізли красиво */
-.price {
-    font-size: 2em;
-    font-weight: 800;
-    color: #7ab317;
-    margin: 10px 0 20px 0;
-}
-
-.pricing-card ul li i {
-    min-width: 25px;
-    /* Вирівнювання іконок */
 }
 
 /* ==================================== */
@@ -3570,12 +3294,13 @@ button.messenger-btn:hover {
     /* --- 2. ВІДГУКІВ-КВАДРАТИ (ФІНАЛЬНА ПРАВКА) --- */
 
     .reviews-section {
-        padding: 40px 0; /* Боки в нуль для розтягування */
-        overflow: hidden; 
+        padding: 40px 0;
+        /* Боки в нуль для розтягування */
+        overflow: hidden;
     }
 
     .reviews-section .container {
-        padding: 0; 
+        padding: 0;
         max-width: 100%;
     }
 
@@ -3584,9 +3309,9 @@ button.messenger-btn:hover {
         flex-wrap: nowrap;
         overflow-x: auto;
         gap: 0;
-        
+
         /* Ефект прориву на весь екран */
-        width: 100vw; 
+        width: 100vw;
         position: relative;
         left: 50%;
         right: 50%;
@@ -3611,18 +3336,20 @@ button.messenger-btn:hover {
     }
 
     .review-card {
-        flex: 0 0 280px; /* Ширина квадрата */
+        flex: 0 0 280px;
+        /* Ширина квадрата */
         width: 280px;
-        height: 280px;   /* Висота = Ширина */
+        height: 280px;
+        /* Висота = Ширина */
         margin: 0 10px;
         scroll-snap-align: center;
 
         background: #fff;
-        padding: 20px; 
+        padding: 20px;
         border-radius: 20px;
         border: 1px solid #eee;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        
+
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -3638,7 +3365,8 @@ button.messenger-btn:hover {
 
         /* 🔥 ОБМЕЖЕННЯ ТЕКСТУ, ЩОБ НЕ ПЛАВАВ РОЗМІР */
         display: -webkit-box;
-        -webkit-line-clamp: 5; /* Максимум 5 рядків */
+        -webkit-line-clamp: 5;
+        /* Максимум 5 рядків */
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -3674,12 +3402,15 @@ button.messenger-btn:hover {
 
     /* --- 3. CTA SECTION (ТІЛЬКИ МОБІЛЬНА ВЕРСІЯ) --- */
     .cta-section {
-        padding: 40px 20px; /* Зрізали відступи вдвічі (було 80px) */
+        padding: 40px 20px;
+        /* Зрізали відступи вдвічі (було 80px) */
     }
 
     .cta-section h2 {
-        font-size: 1.8em; /* Було 2.5em — тепер заголовок акуратний */
-        margin-bottom: 20px; /* Трохи притиснули до кнопки (було 30px) */
+        font-size: 1.8em;
+        /* Було 2.5em — тепер заголовок акуратний */
+        margin-bottom: 20px;
+        /* Трохи притиснули до кнопки (було 30px) */
         line-height: 1.2;
     }
 }
@@ -3696,41 +3427,49 @@ button.messenger-btn:hover {
     }
 
     .services-hero h1 {
-        font-size: 2.2em; /* Було 3.5em */
+        font-size: 2.2em;
+        /* Було 3.5em */
         line-height: 1.2;
         margin-bottom: 15px;
     }
 
     .services-hero p {
-        font-size: 16px; /* Замість 1.2em */
+        font-size: 16px;
+        /* Замість 1.2em */
         line-height: 1.5;
     }
 
     /* --- 2. ПРОЦЕС РОБОТИ (СІТКА 2х2 - CLEAN & BOLD) --- */
     .process-section {
-        padding: 40px 15px; 
+        padding: 40px 15px;
     }
 
     .process-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr; 
-        gap: 25px 15px; /* Більше відступу по вертикалі */
+        grid-template-columns: 1fr 1fr;
+        gap: 25px 15px;
+        /* Більше відступу по вертикалі */
         margin-top: 20px;
     }
 
     .process-step {
         padding: 10px;
-        background: transparent; /* Прибрали фон */
-        border: none;             /* Прибрали рамки */
+        background: transparent;
+        /* Прибрали фон */
+        border: none;
+        /* Прибрали рамки */
         position: relative;
     }
 
     /* Великі стильні цифри на фоні */
     .step-number {
-        font-size: 3.5em;       /* Знову робимо великими */
+        font-size: 3.5em;
+        /* Знову робимо великими */
         font-weight: 900;
-        color: #7ab317;         /* Колір бренду */
-        opacity: 0.1;           /* Але ледь помітні (10% видимості) */
+        color: #7ab317;
+        /* Колір бренду */
+        opacity: 0.1;
+        /* Але ледь помітні (10% видимості) */
         top: -10px;
         left: 50%;
         transform: translateX(-50%);
@@ -3738,12 +3477,14 @@ button.messenger-btn:hover {
     }
 
     .step-icon {
-        font-size: 2.2em;       /* Трохи збільшили іконку */
+        font-size: 2.2em;
+        /* Трохи збільшили іконку */
         color: #7ab317;
         margin-bottom: 10px;
         margin-top: 15px;
         position: relative;
-        z-index: 2;             /* Іконка поверх цифри */
+        z-index: 2;
+        /* Іконка поверх цифри */
     }
 
     .process-step h3 {
@@ -3760,5 +3501,328 @@ button.messenger-btn:hover {
         color: #666;
         position: relative;
         z-index: 2;
+    }
+}
+
+/* ==================================== */
+/* 34. TECH TOGGLE CARDS (SIMPLE & CLEAN) */
+/* ==================================== */
+
+.pricing-modern {
+    padding: 80px 0;
+    background-color: #fcfcfc;
+}
+
+.pricing-carousel {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    padding: 20px 10px;
+    padding-bottom: 50px;
+}
+
+/* --- КАРТКА --- */
+.tech-card {
+    background: #fff;
+    border-radius: 24px;
+    width: 320px;
+    flex-shrink: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    /* Щоб кути були круглими */
+}
+
+.tech-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* 🔥 БЕЙДЖ "ХІТ" (Короткий) */
+.floating-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    background: #7ab317;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(122, 179, 23, 0.3);
+    z-index: 10;
+}
+
+/* --- ШАПКА --- */
+.tech-header {
+    /* 🔥 ПОВЕРНУЛИ 40px - тепер нічого не наїжджає */
+    padding: 40px 20px 10px;
+    text-align: center;
+    background: #fff;
+}
+
+.icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 26px;
+    background: #f9f9f9;
+    transition: transform 0.3s;
+}
+
+.tech-card:hover .icon-box {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.tech-header h3 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #333;
+}
+
+.tech-header p {
+    color: #888;
+    font-size: 0.9em;
+    margin: 5px 0 0;
+}
+
+/* --- ЦІНА --- */
+.tech-price {
+    text-align: center;
+    padding: 10px 0;
+    background: #fff;
+}
+
+.tech-price .currency {
+    font-size: 1.6em;
+    vertical-align: top;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.tech-price .amount {
+    font-size: 3.8em;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+/* --- ПЕРЕМИКАЧІ --- */
+.toggle-container {
+    padding: 0 25px;
+    margin: 15px 0;
+    text-align: center;
+    background: #fff;
+}
+
+.toggle-label {
+    font-size: 11px;
+    color: #bbb;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.toggle-group {
+    display: flex;
+    background: #f7f7f7;
+    border-radius: 14px;
+    padding: 4px;
+    justify-content: space-between;
+}
+
+.toggle-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #888;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+    color: #555;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+/* --- ТІЛО КАРТКИ --- */
+.tech-body {
+    padding: 25px;
+    background: #fff;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 24px 24px;
+}
+
+.tech-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.tech-list li {
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center;
+}
+
+.tech-list li i {
+    margin-right: 12px;
+    font-size: 14px;
+}
+
+/* КНОПКА */
+.tech-btn {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    text-align: center;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: 800;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tech-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* ========================================= */
+/* 🎨 ТЕМИ (COLOR THEMES)                    */
+/* ========================================= */
+
+/* 🟠 СТАРТ */
+.theme-start .icon-box {
+    color: #f39c12;
+    background: #fff8e1;
+}
+
+.theme-start .tech-price {
+    color: #f39c12;
+}
+
+.theme-start .tech-list li i {
+    color: #f39c12;
+}
+
+.theme-start .tech-btn {
+    background: #f39c12;
+    box-shadow: 0 10px 20px rgba(243, 156, 18, 0.2);
+}
+
+.theme-start .toggle-btn.active {
+    background: #fff;
+    color: #f39c12;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 🟢 БАЛАНС */
+.theme-balance {
+    border: 2px solid #7ab317;
+    z-index: 2;
+    transform: none;
+}
+
+.theme-balance .icon-box {
+    color: #7ab317;
+    background: #f1f8e9;
+}
+
+.theme-balance .tech-price {
+    color: #7ab317;
+}
+
+.theme-balance .tech-list li i {
+    color: #7ab317;
+}
+
+.theme-balance .tech-btn {
+    background: #7ab317;
+    box-shadow: 0 10px 20px rgba(122, 179, 23, 0.25);
+}
+
+.theme-balance .toggle-btn.active {
+    background: #fff;
+    color: #7ab317;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 🟣 VIP */
+.theme-vip .icon-box {
+    color: #9c27b0;
+    background: #f3e5f5;
+}
+
+.theme-vip .tech-price {
+    color: #9c27b0;
+}
+
+.theme-vip .tech-list li i {
+    color: #9c27b0;
+}
+
+.theme-vip .tech-btn {
+    background: #9c27b0;
+    box-shadow: 0 10px 20px rgba(156, 39, 176, 0.2);
+}
+
+.theme-vip .toggle-btn.active {
+    background: #fff;
+    color: #9c27b0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* --- 📱 МОБІЛЬНА АДАПТАЦІЯ --- */
+@media (max-width: 900px) {
+    .pricing-modern {
+        padding: 40px 0;
+    }
+
+    .pricing-carousel {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        margin-left: -50vw;
+        padding-top: 20px;
+        padding-bottom: 40px;
+        padding-left: calc(50% - 160px);
+        padding-right: calc(50% - 160px);
+
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .pricing-carousel::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tech-card {
+        margin: 0 10px;
+        scroll-snap-align: center;
     }
 }

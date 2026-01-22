@@ -330,6 +330,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* ==================================== */
+    /* 🔥 JS ДЛЯ ПЕРЕМИКАЧІВ ЦІН (FIXED)    */
+    /* ==================================== */
 
+    // Мы цепляем функцию прямо к окну (window), чтобы HTML её точно увидел
+    window.switchPrice = function (button, priceId, newPrice) {
 
+        // 1. Находим контейнер кнопок
+        const group = button.parentElement;
+
+        // 2. Убираем класс 'active' у всех соседних кнопок
+        const buttons = group.querySelectorAll('.toggle-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // 3. Делаем нажатую кнопку активной
+        button.classList.add('active');
+
+        // 4. Оновлюємо ціну з анімацією
+        const priceElement = document.getElementById(priceId);
+
+        if (priceElement) {
+            // Исчезновение
+            priceElement.style.opacity = 0.5;
+            priceElement.style.transform = "scale(0.9)";
+            priceElement.style.transition = "all 0.2s";
+
+            setTimeout(() => {
+                // Смена текста
+                priceElement.textContent = newPrice;
+                // Появление
+                priceElement.style.opacity = 1;
+                priceElement.style.transform = "scale(1)";
+            }, 200);
+        }
+    };
 });
