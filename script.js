@@ -365,4 +365,76 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 200);
         }
     };
+
+    /* ==================================== */
+    /* АВТО-СКРОЛ ДО СЕРЕДНЬОЇ КАРТКИ (Mobile) */
+    /* ==================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+        const carousel = document.querySelector('.pricing-carousel');
+
+        // Перевіряємо, чи ми на мобільному і чи є карусель
+        if (carousel && window.innerWidth <= 900) {
+            // Знаходимо середню картку (вона друга, індекс 1)
+            const middleCard = carousel.children[1];
+
+            if (middleCard) {
+                // Прокручуємо до неї плавно
+                // Використовуємо setTimeout, щоб браузер встиг намалювати картки
+                setTimeout(() => {
+                    const scrollPos = middleCard.offsetLeft - (carousel.clientWidth / 2) + (middleCard.clientWidth / 2);
+                    carousel.scrollTo({
+                        left: scrollPos,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+        }
+    });
+
+    /* ==================================== */
+    /* ЦЕНТРУВАННЯ КАРТКИ БАЛАНС ПРИ СТАРТІ */
+    /* ==================================== */
+    window.addEventListener('load', () => {
+        const carousel = document.querySelector('.pricing-carousel');
+
+        if (carousel && window.innerWidth <= 900) {
+            // Картка Баланс — це другий елемент (індекс 1)
+            const balanceCard = carousel.querySelectorAll('.tech-card')[1];
+
+            if (balanceCard) {
+                // Розраховуємо позицію для центрування
+                const scrollPos = balanceCard.offsetLeft - (carousel.clientWidth / 2) + (balanceCard.clientWidth / 2);
+
+                // Прокручуємо до неї (behavior: 'auto' для миттєвого ефекту при завантаженні)
+                carousel.scrollTo({
+                    left: scrollPos,
+                    behavior: 'auto'
+                });
+            }
+        }
+    });
+
+    /* ==================================== */
+    /* 🔥 ОНОВЛЕНА ЛОГІКА ТАБІВ (FIXED)      */
+    /* ==================================== */
+    window.openTab = function (evt, tabName) {
+        // 1. Шукаємо всі панелі з новим класом 'tab-pane'
+        const tabPanes = document.getElementsByClassName("tab-pane");
+        for (let i = 0; i < tabPanes.length; i++) {
+            tabPanes[i].classList.remove("active");
+        }
+
+        // 2. Шукаємо всі кнопки з новим класом 'tab-pill'
+        const tabPills = document.getElementsByClassName("tab-pill");
+        for (let i = 0; i < tabPills.length; i++) {
+            tabPills[i].classList.remove("active");
+        }
+
+        // 3. Активуємо потрібну панель та кнопку
+        const targetTab = document.getElementById(tabName);
+        if (targetTab) {
+            targetTab.classList.add("active");
+        }
+        evt.currentTarget.classList.add("active");
+    };
 });

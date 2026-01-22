@@ -115,8 +115,10 @@
                 <div class="tech-card theme-start">
                     <div class="tech-header">
                         <div class="icon-box"><i class="fas fa-feather-alt"></i></div>
-                        <h3>Старт</h3>
-                        <p>Легкий вхід у систему</p>
+                        <div class="header-text">
+                            <h3>Старт</h3>
+                            <p>Легкий вхід у систему</p>
+                        </div>
                     </div>
 
                     <div class="tech-price">
@@ -148,8 +150,10 @@
 
                     <div class="tech-header">
                         <div class="icon-box"><i class="fas fa-apple-alt"></i></div>
-                        <h3>Баланс</h3>
-                        <p>Здоров'я та контроль</p>
+                        <div class="header-text">
+                            <h3>Баланс</h3>
+                            <p>Здоров'я та контроль</p>
+                        </div>
                     </div>
 
                     <div class="tech-price">
@@ -180,8 +184,10 @@
                 <div class="tech-card theme-vip">
                     <div class="tech-header">
                         <div class="icon-box"><i class="fas fa-crown"></i></div>
-                        <h3>VIP</h3>
-                        <p>Повний супровід 24/7</p>
+                        <div class="header-text">
+                            <h3>VIP</h3>
+                            <p>Повний супровід 24/7</p>
+                        </div>
                     </div>
 
                     <div class="tech-price">
@@ -214,17 +220,159 @@
 
     <section class="services-details">
         <div class="container">
-            <div class="consult-promo">
-                <div class="consult-text">
-                    <h3>Потрібна лише консультація?</h3>
-                    <p>
-                        Якщо ви не плануєте довгий супровід, але маєте питання по аналізах,
-                        вітамінах або хочете скоригувати поточний раціон.
-                    </p>
+            <div class="consult-promo tech-style">
+                <div class="consult-main">
+                    <div class="consult-header-box">
+                        <div class="consult-icon">
+                            <i class="fas fa-comment-medical"></i>
+                        </div>
+                        <div class="consult-info">
+                            <h3>Потрібна лише консультація?</h3>
+                            <p class="consult-descr">Розбір аналізів, підбір вітамінів або швидке корегування раціону
+                                без тривалого супроводу.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="consult-action">
-                    <span class="consult-price">500 ₴</span>
-                    <a href="consultation.html" class="btn-dark">Дізнатись деталі</a>
+
+                <div class="consult-footer-action">
+                    <div class="consult-price-tag">
+                        <span class="label">Вартість:</span>
+                        <span class="value">500 ₴</span>
+                    </div>
+                    <a href="consultation.html" class="btn-consult">Дізнатись деталі</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="details-section">
+        <div class="container">
+            <div class="process-wrapper">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">Твій шлях до результату</h2>
+                <div class="process-path">
+                    <div class="process-step-modern">
+                        <div class="icon-wrap theme-start">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="step-text">
+                            <h4>Крок 1: Анкета</h4>
+                            <p>Я отримую ваші дані про стан здоров'я, звички та вподобання.</p>
+                        </div>
+                    </div>
+                    <div class="process-step-modern">
+                        <div class="icon-wrap theme-balance">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <div class="step-text">
+                            <h4>Крок 2: Стратегія</h4>
+                            <p>Я аналізую показники та розробляю персональну схему харчування.</p>
+                        </div>
+                    </div>
+                    <div class="process-step-modern">
+                        <div class="icon-wrap theme-vip">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="step-text">
+                            <h4>Крок 3: Супровід</h4>
+                            <p>Я поруч на кожному етапі, допомагаю та адаптую план під ваші відчуття.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs-control-panel">
+                <h3 class="tabs-main-title">Що входить у кожен формат?</h3>
+
+                <div class="tabs-toggle-bar">
+                    <button class="tab-pill active theme-start" onclick="openTab(event, 'tab-start')">Старт</button>
+                    <button class="tab-pill theme-balance" onclick="openTab(event, 'tab-balance')">Баланс</button>
+                    <button class="tab-pill theme-vip" onclick="openTab(event, 'tab-vip')">VIP</button>
+                </div>
+
+                <div class="tab-window">
+                    <div id="tab-start" class="tab-pane active">
+                        <div class="tab-features">
+                            <div class="feature-item">
+                                <div class="f-icon"><i class="fas fa-utensils"></i></div>
+                                <div class="f-text">
+                                    <h5>Раціон</h5>
+                                    <p>Складаю меню з ваших улюблених продуктів, які легко знайти в магазині та просто
+                                        готувати.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="f-icon"><i class="fas fa-calculator"></i></div>
+                                <div class="f-text">
+                                    <h5>КБЖВ</h5>
+                                    <p>Вираховую ідеальну норму калорій та баланс нутрієнтів під вашу поточну мету.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="f-icon"><i class="fas fa-tasks"></i></div>
+                                <div class="f-text">
+                                    <h5>Звіти</h5>
+                                    <p>Аналізую ваші успіхи щотижня та вношу правки в план для кращої динаміки.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-balance" class="tab-pane">
+                        <div class="tab-features">
+                            <div class="feature-item">
+                                <div class="f-icon green"><i class="fas fa-notes-medical"></i></div>
+                                <div class="f-text">
+                                    <h5>Аналізи</h5>
+                                    <p>Я аналізую ваші показники та за потреби проводжу корекцію нутрицевтиків
+                                        (вітамінів).</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="f-icon green"><i class="fas fa-comments"></i></div>
+                                <div class="f-text">
+                                    <h5>Чат 24/7</h5>
+                                    <p>Формат "запитання-відповідь". Я допомагаю з вибором страв у ресторанах та
+                                        закупками.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="f-icon green"><i class="fas fa-plus-circle"></i></div>
+                                <div class="f-text">
+                                    <h5>Старт +</h5>
+                                    <p>Всі переваги базового тарифу вже включені до цього пакету супроводу.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-vip" class="tab-pane">
+                        <div class="tab-features">
+                            <div class="feature-item">
+                                <div class="f-icon purple"><i class="fas fa-crown"></i></div>
+                                <div class="f-text">
+                                    <h5>Менторство</h5>
+                                    <p>Я стаю вашим особистим наставником. Мій фокус уваги на вашому результаті на всі
+                                        100%.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="f-icon purple"><i class="fas fa-camera"></i></div>
+                                <div class="f-text">
+                                    <h5>Контроль їжі</h5>
+                                    <p>Ви надсилаєте фото кожної тарілки — я перевіряю склад та розмір порції в
+                                        реальному часі.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="f-icon purple"><i class="fas fa-gem"></i></div>
+                                <div class="f-text">
+                                    <h5>Пріоритет</h5>
+                                    <p>Максимально швидкі відповіді та щоденна підтримка без обмежень по кількості
+                                        запитань.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

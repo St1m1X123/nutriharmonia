@@ -1670,112 +1670,172 @@ body {
 }
 
 /* ==================================== */
-/* 19. БЛОК "РАЗОВА КОНСУЛЬТАЦІЯ" (ВСТАВКА) */
+/* 19. MODERN CONSULTATION BLOCK        */
 /* ==================================== */
-.consult-promo {
-    margin-top: 60px;
+
+.services-details {
+    padding-bottom: 60px;
+}
+
+.consult-promo.tech-style {
+    margin-top: -20px;
+    /* Підтягуємо ближче до карток на комп'ютері */
     background: white;
-    border-radius: 20px;
-    padding: 40px;
+    border-radius: 24px;
+    /* Як у наших карток */
+    padding: 30px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
     position: relative;
-    overflow: hidden;
-
-    /* Змінив сіру рамку на легку зелену */
-    border: 2px solid #e8f5e9;
-    text-align: left;
+    transition: transform 0.3s ease;
 }
 
-/* Зелена смужка збоку (БУЛО #333 -> СТАЛО #7ab317) */
-.consult-promo::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 8px;
-    background-color: #7ab317;
-    /* ТЕПЕР ЗЕЛЕНА */
+.consult-promo.tech-style:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
-.consult-text h3 {
-    font-size: 1.8em;
-    color: #333;
-    margin-bottom: 10px;
-    font-weight: 800;
-}
-
-.consult-text p {
-    color: #666;
-    font-size: 1.1em;
-    max-width: 600px;
-    line-height: 1.6;
-}
-
-.consult-action {
+/* Іконка */
+.consult-icon {
+    width: 60px;
+    height: 60px;
+    background: #f1f8e9;
+    color: #7ab317;
+    border-radius: 18px;
     display: flex;
     align-items: center;
-    gap: 25px;
+    justify-content: center;
+    font-size: 24px;
     flex-shrink: 0;
 }
 
-/* Ціна (БУЛО #333 -> СТАЛО #7ab317) */
-.consult-price {
-    font-size: 2em;
-    font-weight: 800;
-    color: #7ab317;
-    /* ТЕПЕР ЗЕЛЕНА */
+.consult-header-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-/* Кнопка (БУЛО #333 -> СТАЛО #7ab317) */
-/* Я залишив клас .btn-dark, щоб не ламати HTML, але перефарбував його */
-.btn-dark {
+.consult-info h3 {
+    font-size: 1.6em;
+    color: #333;
+    margin: 0 0 5px 0;
+    font-weight: 800;
+}
+
+.consult-descr {
+    color: #777;
+    font-size: 1em;
+    margin: 0;
+    max-width: 500px;
+    line-height: 1.5;
+}
+
+/* Права частина: Ціна + Кнопка */
+.consult-footer-action {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-shrink: 0;
+}
+
+.consult-price-tag {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.consult-price-tag .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #bbb;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.consult-price-tag .value {
+    font-size: 2.2em;
+    font-weight: 800;
+    color: #7ab317;
+    line-height: 1;
+}
+
+.btn-consult {
     background-color: #7ab317;
-    /* ТЕПЕР ЗЕЛЕНА */
     color: white;
-    padding: 15px 40px;
-    border-radius: 50px;
+    padding: 16px 35px;
+    border-radius: 14px;
     text-decoration: none;
     font-weight: 700;
     transition: all 0.3s;
-    box-shadow: 0 5px 15px rgba(122, 179, 23, 0.3);
-    /* Зелена тінь */
+    box-shadow: 0 8px 20px rgba(122, 179, 23, 0.2);
+    white-space: nowrap;
 }
 
-.btn-dark:hover {
-    background-color: #4a7d0e;
-    /* Темніша зелена при наведенні */
+.btn-consult:hover {
+    filter: brightness(1.1);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(122, 179, 23, 0.4);
 }
 
-/* Адаптив для телефону */
+/* ==================================== */
+/* 📱 МОБІЛЬНИЙ ВИГЛЯД (COMPACT)        */
+/* ==================================== */
 @media (max-width: 900px) {
-    .consult-promo {
+    .consult-promo.tech-style {
         flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
+        padding: 20px;
+        margin-top: 0;
+        /* На мобілці відступ не чіпаємо */
+        gap: 20px;
+        align-items: flex-start;
     }
 
-    .consult-promo::before {
-        width: 100%;
-        height: 8px;
-        /* Смужка зверху */
-    }
-
-    .consult-action {
-        flex-direction: column;
+    .consult-header-box {
         gap: 15px;
-        width: 100%;
     }
 
-    .btn-dark {
+    .consult-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        border-radius: 14px;
+    }
+
+    .consult-info h3 {
+        font-size: 1.3em;
+    }
+
+    .consult-descr {
+        font-size: 0.9em;
+        max-width: 100%;
+    }
+
+    /* 🔥 ГОЛОВНЕ: Ціна та Кнопка в один ряд */
+    .consult-footer-action {
         width: 100%;
-        text-align: center;
+        flex-direction: row;
+        /* Ряд! */
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 15px;
+        border-top: 1px solid #f5f5f5;
+        /* Легка лінія розділення */
+    }
+
+    .consult-price-tag {
+        text-align: left;
+    }
+
+    .consult-price-tag .value {
+        font-size: 1.8em;
+    }
+
+    .btn-consult {
+        padding: 12px 20px;
+        font-size: 0.95em;
     }
 }
 
@@ -3792,25 +3852,29 @@ button.messenger-btn:hover {
 }
 
 
-/* --- 📱 МОБІЛЬНА АДАПТАЦІЯ --- */
+/* ==================================== */
+/* 35. МОБІЛЬНА ОПТИМІЗАЦІЯ (CLEAN CODE) */
+/* ==================================== */
 @media (max-width: 900px) {
-    .pricing-modern {
-        padding: 40px 0;
-    }
 
     .pricing-carousel {
         display: flex;
         flex-wrap: nowrap;
         overflow-x: auto;
-        gap: 0;
-        width: 100vw;
+        gap: 15px;
+
+        /* Прибрали !important, тепер працює черговість коду */
+        justify-content: flex-start;
+        width: 100%;
+        margin: 0;
+        left: 0;
         position: relative;
-        left: 50%;
-        margin-left: -50vw;
-        padding-top: 20px;
-        padding-bottom: 40px;
+
+        /* Відступи для центрування першої та останньої карток */
         padding-left: calc(50% - 160px);
         padding-right: calc(50% - 160px);
+        padding-top: 30px;
+        padding-bottom: 50px;
 
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
@@ -3822,7 +3886,263 @@ button.messenger-btn:hover {
     }
 
     .tech-card {
-        margin: 0 10px;
         scroll-snap-align: center;
+        flex: 0 0 320px;
+        margin: 0;
+        border-radius: 24px;
+        transform: none;
+        /* Скидаємо десктопне збільшення Балансу */
     }
+
+    /* Компактна шапка для мобільних */
+    .tech-header {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        padding: 20px 20px 5px 20px;
+    }
+
+    .icon-box {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        margin: 0 15px 0 0;
+        flex-shrink: 0;
+        border-radius: 14px;
+    }
+
+    .header-text h3 {
+        font-size: 1.4em;
+        margin-bottom: 2px;
+    }
+
+    .header-text p {
+        font-size: 0.8em;
+        margin: 0;
+    }
+
+    .tech-price {
+        padding: 0 0 15px 83px;
+        text-align: left;
+    }
+
+    .tech-price .amount {
+        font-size: 2.8em;
+    }
+
+    .toggle-label {
+        display: none;
+    }
+
+    .tech-body {
+        padding: 10px 20px 20px;
+    }
+}
+
+/* ==================================== */
+/* 20. MODERN DETAILS & TABS SECTION    */
+/* ==================================== */
+
+.details-section {
+    padding: 100px 0;
+    background-color: #f9fbf9; /* Легкий фон для контрасту */
+}
+
+/* --- ПРОЦЕС (Шлях клієнта) --- */
+.process-path {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 80px;
+    padding: 0 40px;
+}
+
+/* Лінія, що з'єднує іконки (тільки на десктопі) */
+.process-path::before {
+    content: '';
+    position: absolute;
+    top: 45px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: repeating-linear-gradient(to right, #7ab317 0, #7ab317 10px, transparent 10px, transparent 20px);
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.process-step-modern {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 0 15px;
+}
+
+.icon-wrap {
+    width: 90px;
+    height: 90px;
+    border-radius: 28px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.process-step-modern:hover .icon-wrap {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.icon-wrap.theme-start { color: #f39c12; }
+.icon-wrap.theme-balance { color: #7ab317; }
+.icon-wrap.theme-vip { color: #9c27b0; }
+
+.step-text h4 {
+    font-size: 1.3em;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.step-text p {
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* --- ТАБИ (Smart Panel) --- */
+.tabs-control-panel {
+    background: #fff;
+    border-radius: 40px;
+    padding: 60px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.03);
+    border: 1px solid #f0f0f0;
+}
+
+.tabs-main-title {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.tabs-toggle-bar {
+    display: flex;
+    background: #f5f5f5;
+    padding: 6px;
+    border-radius: 20px;
+    max-width: 450px;
+    margin: 0 auto 50px;
+}
+
+.tab-pill {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #888;
+}
+
+/* Активні кольори табів */
+.tab-pill.active.theme-start { background: #fff; color: #f39c12; box-shadow: 0 5px 15px rgba(243, 156, 18, 0.15); }
+.tab-pill.active.theme-balance { background: #fff; color: #7ab317; box-shadow: 0 5px 15px rgba(122, 179, 23, 0.15); }
+.tab-pill.active.theme-vip { background: #fff; color: #9c27b0; box-shadow: 0 5px 15px rgba(156, 39, 176, 0.15); }
+
+/* Контент табів */
+.tab-pane {
+    display: none;
+    animation: slideUp 0.5s ease;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.tab-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.feature-item {
+    padding: 30px;
+    background: #fcfcfc;
+    border-radius: 25px;
+    border: 1px solid #f7f7f7;
+    transition: all 0.3s;
+}
+
+.feature-item:hover {
+    background: #fff;
+    border-color: #eee;
+    transform: translateY(-3px);
+}
+
+.f-icon {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f39c12; /* Start */
+}
+
+.f-icon.green { color: #7ab317; }
+.f-icon.purple { color: #9c27b0; }
+
+.f-text h5 {
+    font-size: 1.15em;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.f-text p {
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.6;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- МОБІЛЬНА АДАПТАЦІЯ --- */
+@media (max-width: 900px) {
+    .details-section { padding: 60px 0; }
+    
+    .process-path {
+        flex-direction: column;
+        gap: 40px;
+        padding: 0;
+    }
+    
+    .process-path::before { display: none; }
+    
+    .process-step-modern {
+        display: flex;
+        text-align: left;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .icon-wrap {
+        margin: 0;
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+        border-radius: 18px;
+    }
+    
+    .tabs-control-panel { padding: 30px 20px; border-radius: 30px; }
+    
+    .tab-features { grid-template-columns: 1fr; gap: 15px; }
+    
+    .feature-item { padding: 20px; }
 }
