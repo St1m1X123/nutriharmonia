@@ -2639,6 +2639,12 @@ body.no-scroll {
     background-color: #6a9c13;
 }
 
+/* Клас для заморозки скролу фону */
+body.no-scroll {
+    overflow: hidden;
+    height: 100vh; /* Фіксуємо висоту, щоб не було "стрибка" */
+}
+
 /* MOBILE FORM OPTIMIZATION (CLEAN)      */
 
 @media (max-width: 900px) {

@@ -225,58 +225,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==================================================
-    // 7. МОДАЛЬНЕ ВІКНО ФОРМИ (ВИПРАВЛЕНО КОНФЛІКТ ІМЕН)
-    // ==================================================
-    const modalOverlay = document.querySelector('.form-modal-overlay');
-    const closeFormBtn = document.querySelector('.close-form-btn');
-    const openModalBtns = document.querySelectorAll('.open-modal-btn');
+// ==================================================
+// 7. МОДАЛЬНЕ ВІКНО ФОРМИ (ФІКС СКРОЛУ ТА КОНФЛІКТІВ)
+// ==================================================
+const modalOverlay = document.querySelector('.form-modal-overlay');
+const closeFormBtn = document.querySelector('.close-form-btn');
+const openModalBtns = document.querySelectorAll('.open-modal-btn');
 
-    // Функція відкриття ФОРМИ (перейменували)
-    const openForm = (e) => {
-        if (e) e.preventDefault();
-        if (modalOverlay) {
-            modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-    };
-
-    // Функція закриття ФОРМИ (перейменували)
-    const closeForm = () => {
-        if (modalOverlay) {
-            modalOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    };
-
-    // Вішаємо подію на кнопки
-    if (openModalBtns.length > 0) {
-        openModalBtns.forEach(btn => {
-            btn.removeEventListener('click', openForm); // Чистка на всяк випадок
-            btn.addEventListener('click', openForm);
-        });
-    }
-
-    // Закриття хрестиком
-    if (closeFormBtn) {
-        closeFormBtn.addEventListener('click', closeForm);
-    }
-
-    // Закриття кліком по фону
+// Функція відкриття ФОРМИ
+const openForm = (e) => {
+    if (e) e.preventDefault();
     if (modalOverlay) {
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                closeForm();
-            }
-        });
+        modalOverlay.classList.add('active');
+        // 🔥 ЗАМІСТЬ style.overflow використовуємо клас:
+        document.body.classList.add('no-scroll');
     }
+};
 
-    // Закриття через Esc
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('active')) {
+// Функція закриття ФОРМИ
+const closeForm = () => {
+    if (modalOverlay) {
+        modalOverlay.classList.remove('active');
+        // 🔥 ПРИБИРАЄМО клас при закритті:
+        document.body.classList.remove('no-scroll');
+    }
+};
+
+// Вішаємо подію на кнопки
+if (openModalBtns.length > 0) {
+    openModalBtns.forEach(btn => {
+        btn.removeEventListener('click', openForm); 
+        btn.addEventListener('click', openForm);
+    });
+}
+
+// Закриття хрестиком
+if (closeFormBtn) {
+    closeFormBtn.addEventListener('click', closeForm);
+}
+
+// Закриття кліком по фону
+if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
             closeForm();
         }
     });
+}
+
+// Закриття через Esc
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('active')) {
+        closeForm();
+    }
+});
+
 
     // ==================================================
     // 8. ЛОГІКА ДЛЯ КРАСИВИХ СПИСКІВ (DROPDOWN)
