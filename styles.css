@@ -1398,13 +1398,75 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Адаптація для мобільних */
-@media (max-width: 768px) {
+/* ==================================== */
+/* 21. СТОРІНКА КОНСУЛЬТАЦІЇ (CLEAN)    */
+/* ==================================== */
 
+/* Загальні налаштування для карток на цій сторінці */
+.consult-promo.tech-style.page-main-card,
+.consult-promo.tech-style.page-full-width {
+    margin: 0 auto; /* Центрування без !important */
+    text-align: left;
+}
+
+/* 1. ВЕРСІЯ: КАРТКА ПО ЦЕНТРУ (850px) */
+.consult-promo.tech-style.page-main-card {
+    max-width: 850px;
+}
+
+/* 2. ВЕРСІЯ: ПОДОВЖЕНА КАРТКА (1200px) */
+.consult-promo.tech-style.page-full-width {
+    width: 100%;
+    max-width: 1200px;
+    padding: 35px 45px; /* Збільшений простір */
+}
+
+/* Ефект декоративної лінії для подовженої версії */
+.page-full-width::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #7ab317, transparent);
+    opacity: 0.3;
+}
+
+/* Налаштування кнопок для обох варіантів */
+.page-main-card .btn-consult,
+.page-full-width .btn-consult {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    min-width: 220px;
+}
+
+/* Примітка під карткою */
+.consult-note {
+    text-align: center;
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 30px;
+    font-style: italic;
+}
+
+/* --- 📱 АДАПТАЦІЯ (MOBILE & TABLET) --- */
+
+@media (max-width: 900px) {
+    /* Прибираємо !important, стилі спрацюють за рахунок медіа-запиту */
+    .consult-promo.tech-style.page-main-card,
+    .consult-promo.tech-style.page-full-width {
+        padding: 25px 20px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Рядки послуг на телефоні */
     .service-row,
     .service-row.reverse {
-        flex-direction: column-reverse;
-        /* Текст завжди знизу на телефоні */
+        flex-direction: column-reverse; /* Текст завжди під картинкою */
         gap: 30px;
         text-align: center;
         margin-bottom: 60px;
@@ -1412,7 +1474,6 @@ body {
 
     .service-list {
         text-align: left;
-        /* Список лишаємо зліва */
         display: inline-block;
     }
 }
@@ -1532,6 +1593,81 @@ body {
 
 .contact-details i {
     color: #7ab317;
+}
+
+/* ==================================== */
+/* 📱 ТОЧКОВІ ПРАВКИ ТІЛЬКИ ДЛЯ МОБІЛКИ */
+/* ==================================== */
+@media (max-width: 900px) {
+
+    /* Налаштовуємо головний контейнер */
+    .contact-hero {
+        padding: 100px 20px 60px; /* Більше повітря зверху */
+        align-items: flex-start; /* Рівняємо по верху */
+    }
+
+    .contact-wrapper {
+        flex-direction: column; /* Ставимо в колонку */
+        gap: 35px;
+    }
+
+    /* 1. ПЕРЕНОСИМО ФОТО ВГОРУ (Використовуємо порядок order) */
+    .contact-image {
+        order: 1; /* Фото йде першим! */
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Центруємо аватарку */
+    }
+
+    .contact-content {
+        order: 2; /* Текст йде другим */
+        text-align: center; /* Центруємо весь текст */
+    }
+
+    /* 2. СТИЛІЗУЄМО АВАТАРКУ (Жорсткі розміри та стиль) */
+    .contact-image img {
+        width: 180px !important;  /* Фіксована ширина */
+        height: 180px !important; /* Фіксована висота */
+        object-fit: cover; /* Щоб фото не розтягувалося */
+        border-radius: 50% !important; /* Робимо круглим */
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important; /* Гарна тінь */
+        border: 5px solid #fff !important; /* Біла рамка */
+        display: block;
+    }
+
+    /* 3. Правки текстів та кнопок */
+    .contact-content h1 {
+        font-size: 2.2em;
+        margin-bottom: 15px;
+    }
+    
+    .contact-content h4 {
+        margin-bottom: 10px;
+    }
+
+    .contact-content p {
+        margin-bottom: 30px;
+        font-size: 1em;
+        padding: 0 10px;
+    }
+
+    /* Кнопки на всю ширину */
+    .messenger-btn {
+        width: 100%; 
+        box-sizing: border-box;
+        padding: 16px;
+        justify-content: center;
+        font-size: 1em;
+    }
+
+    /* Контакти знизу по центру */
+    .contact-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 30px;
+    }
 }
 
 /* ==================================== */
@@ -1761,6 +1897,7 @@ body {
     font-weight: 800;
     color: #7ab317;
     line-height: 1;
+    white-space: nowrap;
 }
 
 .btn-consult {
@@ -2500,6 +2637,97 @@ body.no-scroll {
 
 .form-btn:hover {
     background-color: #6a9c13;
+}
+
+/* MOBILE FORM OPTIMIZATION (CLEAN)      */
+
+@media (max-width: 900px) {
+    /* 1. Позиціонування: притискаємо до верху для зручності клавіатури */
+    .form-modal-overlay {
+        align-items: flex-start; 
+        padding: 15px;
+    }
+
+    /* 2. Контейнер: розширюємо на весь екран */
+    .form-modal-overlay .form-modal-container {
+        padding: 30px 20px; /* Зменшуємо внутрішні поля, щоб інпути стали ширшими */
+        margin-top: 40px; /* Відступ від верхнього краю екрана */
+        border-radius: 24px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 3. Заголовки: робимо трохи компактнішими */
+    .form-wrapper-modal h2 {
+        font-size: 1.5em;
+        margin-bottom: 8px;
+    }
+
+    .form-wrapper-modal p {
+        font-size: 0.9em;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    /* 4. Поля введення: запобігаємо "авто-зуму" на iPhone та додаємо висоти */
+    .modern-form .form-input, 
+    .modern-form .custom-select-trigger {
+        font-size: 16px; /* Мінімум 16px, щоб браузер не збільшував екран при кліку */
+        padding: 14px 15px;
+        height: auto;
+    }
+
+    /* 5. Хрестик: збільшуємо зону натискання */
+    .form-modal-container .close-form-btn {
+        top: 10px;
+        right: 10px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f5f5; /* Робимо його помітнішим на мобілці */
+        border-radius: 50%;
+        font-size: 24px;
+    }
+
+    /* 6. Кнопка відправки: робимо масивною для великого пальця */
+    .modern-form .form-btn {
+        padding: 18px;
+        font-size: 1.1em;
+        margin-top: 15px;
+        border-radius: 14px;
+    }
+
+    /* 7. Фікс випадаючих списків: щоб вони не перекривали все вікно */
+    .custom-options {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    /* 8. Забороняємо всьому модальному вікну виходити за межі екрана */
+    .form-modal-overlay {
+        box-sizing: border-box;
+        overflow-x: hidden; /* Пряма заборона горизонтального скролу */
+        width: 100%;
+    }
+
+    /* 9. Коригуємо контейнер */
+    .form-modal-overlay .form-modal-container {
+        width: 100%;
+        max-width: 100%; /* Гарантуємо, що він не ширший за батьківський блок */
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box; /* Важливо для правильного підрахунку ширини */
+    }
+
+    /* 10. Додатковий фікс для всіх полів всередині, щоб вони теж не вилазили */
+    .modern-form .form-input, 
+    .modern-form .custom-select-trigger,
+    .modern-form .form-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
 
 /* ==================================== */
@@ -3943,83 +4171,12 @@ button.messenger-btn:hover {
 /* 20. MODERN DETAILS & TABS SECTION    */
 /* ==================================== */
 
-.details-section {
-    padding: 100px 0;
-    background-color: #f9fbf9; /* Легкий фон для контрасту */
-}
-
-/* --- ПРОЦЕС (Шлях клієнта) --- */
-.process-path {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    margin-bottom: 80px;
-    padding: 0 40px;
-}
-
-/* Лінія, що з'єднує іконки (тільки на десктопі) */
-.process-path::before {
-    content: '';
-    position: absolute;
-    top: 45px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: repeating-linear-gradient(to right, #7ab317 0, #7ab317 10px, transparent 10px, transparent 20px);
-    opacity: 0.2;
-    z-index: 1;
-}
-
-.process-step-modern {
-    flex: 1;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    padding: 0 15px;
-}
-
-.icon-wrap {
-    width: 90px;
-    height: 90px;
-    border-radius: 28px;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    margin: 0 auto 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-}
-
-.process-step-modern:hover .icon-wrap {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-}
-
-.icon-wrap.theme-start { color: #f39c12; }
-.icon-wrap.theme-balance { color: #7ab317; }
-.icon-wrap.theme-vip { color: #9c27b0; }
-
-.step-text h4 {
-    font-size: 1.3em;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.step-text p {
-    font-size: 0.95em;
-    color: #666;
-    line-height: 1.6;
-}
-
 /* --- ТАБИ (Smart Panel) --- */
 .tabs-control-panel {
     background: #fff;
     border-radius: 40px;
     padding: 60px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.03);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.03);
     border: 1px solid #f0f0f0;
 }
 
@@ -4053,9 +4210,23 @@ button.messenger-btn:hover {
 }
 
 /* Активні кольори табів */
-.tab-pill.active.theme-start { background: #fff; color: #f39c12; box-shadow: 0 5px 15px rgba(243, 156, 18, 0.15); }
-.tab-pill.active.theme-balance { background: #fff; color: #7ab317; box-shadow: 0 5px 15px rgba(122, 179, 23, 0.15); }
-.tab-pill.active.theme-vip { background: #fff; color: #9c27b0; box-shadow: 0 5px 15px rgba(156, 39, 176, 0.15); }
+.tab-pill.active.theme-start {
+    background: #fff;
+    color: #f39c12;
+    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.15);
+}
+
+.tab-pill.active.theme-balance {
+    background: #fff;
+    color: #7ab317;
+    box-shadow: 0 5px 15px rgba(122, 179, 23, 0.15);
+}
+
+.tab-pill.active.theme-vip {
+    background: #fff;
+    color: #9c27b0;
+    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.15);
+}
 
 /* Контент табів */
 .tab-pane {
@@ -4090,11 +4261,17 @@ button.messenger-btn:hover {
 .f-icon {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #f39c12; /* Start */
+    color: #f39c12;
+    /* Start */
 }
 
-.f-icon.green { color: #7ab317; }
-.f-icon.purple { color: #9c27b0; }
+.f-icon.green {
+    color: #7ab317;
+}
+
+.f-icon.purple {
+    color: #9c27b0;
+}
 
 .f-text h5 {
     font-size: 1.15em;
@@ -4109,40 +4286,122 @@ button.messenger-btn:hover {
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* --- МОБІЛЬНА АДАПТАЦІЯ --- */
 @media (max-width: 900px) {
-    .details-section { padding: 60px 0; }
-    
+    .details-section {
+        padding: 50px 0;
+    }
+
+    /* Шлях до результату (залишаємо як є, лише трохи компактніше) */
     .process-path {
         flex-direction: column;
-        gap: 40px;
+        gap: 30px;
         padding: 0;
     }
-    
-    .process-path::before { display: none; }
-    
+
+    .process-path::before {
+        display: none;
+    }
+
     .process-step-modern {
         display: flex;
         text-align: left;
         align-items: center;
-        gap: 20px;
+        gap: 15px;
     }
-    
-    .icon-wrap {
+
+    /* Панель з табами */
+    .tabs-control-panel {
+        padding: 30px 15px;
+        border-radius: 25px;
+    }
+
+    .tabs-main-title {
+        font-size: 1.5em;
+        margin-bottom: 25px;
+    }
+
+    .tabs-toggle-bar {
+        margin-bottom: 30px;
+        border-radius: 15px;
+    }
+
+    .tab-pill {
+        padding: 12px 5px;
+        font-size: 14px;
+    }
+
+    /* 🔥 ПЕРЕТВОРЕННЯ КАРТОК НА СПИСОК */
+    .tab-features {
+        grid-template-columns: 1fr;
+        /* Одна колонка */
+        gap: 0;
+        /* Прибираємо проміжок, бо будуть лінії-розділювачі */
+    }
+
+    .feature-item {
+        display: flex;
+        /* Ряд: іконка + текст */
+        align-items: flex-start;
+        text-align: left;
+        padding: 20px 0;
+        /* Тільки вертикальні відступи */
+        background: transparent;
+        /* Прибираємо білий фон картки */
+        border: none;
+        border-bottom: 1px solid #f0f0f0;
+        /* Легка лінія між пунктами */
+        box-shadow: none;
+        /* Прибираємо тінь */
+        border-radius: 0;
+    }
+
+    .feature-item:last-child {
+        border-bottom: none;
+        /* У останнього пункту немає лінії */
+    }
+
+    .feature-item:hover {
+        transform: none;
+        /* Вимикаємо анімацію на мобільних */
+    }
+
+    /* Стиль іконки у списку */
+    .f-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+        margin-bottom: 0;
+        /* Прибираємо марджин знизу */
+        margin-right: 15px;
+        /* Додаємо марджин праворуч */
+        background: #f9f9f9;
+        /* Дуже легкий фон для іконки */
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .f-text h5 {
+        font-size: 1.1em;
+        margin-bottom: 4px;
+    }
+
+    .f-text p {
+        font-size: 0.85em;
+        line-height: 1.4;
         margin: 0;
-        width: 60px;
-        height: 60px;
-        font-size: 20px;
-        border-radius: 18px;
     }
-    
-    .tabs-control-panel { padding: 30px 20px; border-radius: 30px; }
-    
-    .tab-features { grid-template-columns: 1fr; gap: 15px; }
-    
-    .feature-item { padding: 20px; }
 }
